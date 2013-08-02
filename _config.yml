@@ -64,7 +64,7 @@ default_asides: [asides/recent_posts.html, asides/github.html, asides/delicious.
 
 # Github repositories
 github_user: kerrizor
-github_repo_count: 0
+github_repo_count: 4
 github_show_profile_link: true
 github_skip_forks: true
 
@@ -88,6 +88,9 @@ pinboard_count: 3
 # Delicious
 delicious_user:
 delicious_count: 3
+
+# LinkedIn
+linkedin_user: kerrizor
 
 # Disqus Comments
 disqus_short_name:
