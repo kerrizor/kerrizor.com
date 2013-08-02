@@ -23,12 +23,12 @@ Similarly, when practicing programming, you need to challenge yourself to learn 
 
 Decide for an afternoon, a day, or even a week, you’re going to use a technique you’re unfamiliar with. Make life hard for yourself on purpose.
 
-+ MONKEY PATCH ALL THE THINGS!
-+ Make everything a gem
-+ TDD the living snot out of the next bug you fix
-+ Use an IDE you don’t normally use for a month
-+ Don’t use the letter ‘G’
-+ Make all actions happen through observers
+  + MONKEY PATCH ALL THE THINGS!
+  + Make everything a gem
+  + TDD the living snot out of the next bug you fix
+  + Use an IDE you don’t normally use for a month
+  + Don’t use the letter ‘G’
+  + Make all actions happen through observers
 
 By forcing yourself to find new patterns to solve your problems, you’ll quickly run into the current limits of your knowledge and experience, and push out past them.
 
@@ -40,15 +40,15 @@ Extend your practice by choosing a simple problem and keep solving it in new way
 
 Simple enough. Five minutes (or less) of Googling will turn up a myriad of solutions, and give you the basic math. Start with making it a small command-line app – easy-peasy lemon-squeezy! Once that’s done (you did tests, too, right?), let’s mutate it and iterate:
 
-+ Make it a gem
-+ Release it on Github
-+ Make it a website
-+ Make it a mix-in on Numeric
-+ Make it a web service
-+ Find other temperature scales you could convert to and from
-+ Have it attempt to resolve the user’s location via browser location or IP address, and give automated temperature conversions
-+ Have it query wikipedia (or other data source) to offer information about the resulting temperature – trivia, facts, elements that melt or ignite or freeze at that temp, etc
-+ Have it record the average, median, and min/max the user has calculated, and say witty things as milestones are passed
-+ …
+  + Make it a gem
+  + Release it on Github
+  + Make it a website
+  + Make it a mix-in on Numeric
+  + Make it a web service
+  + Find other temperature scales you could convert to and from
+  + Have it attempt to resolve the user’s location via browser location or IP address, and give automated temperature conversions
+  + Have it query wikipedia (or other data source) to offer information about the resulting temperature – trivia, facts, elements that melt or ignite or freeze at that temp, etc
+  + Have it record the average, median, and min/max the user has calculated, and say witty things as milestones are passed
+  + …
 
 Practice doesn’t have to be about flash cards and rote memorization. Try a little learning-by-doing, by applying concepts and techniques you want to try to your daily workflow but haven’t found the time for. Get your hands dirty and stretch outside your comfort zone, and approach previously solved and well-understood problems from a fresh perspective, to truly discover the benefits (and drawbacks) of approaches you’re unfamiliar with.
