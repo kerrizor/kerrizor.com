@@ -6,9 +6,6 @@ comments: true
 categories: [Rails, Internationalization, I18n, Tutorial]
 ---
 
-Internationalization (I18n)
----------------------------
-
 Rails by default installs support for internationalization (or *I18n*) through the gem `i18n`. This gem add support for multiple language dictionaries and translation files, to let you easily change the language your site displays.
 
 <!-- more -->

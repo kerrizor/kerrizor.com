@@ -4,7 +4,7 @@
   <title><![CDATA[Category: I18n | Kerri Miller]]></title>
   <link href="http://kerrizor.com/blog/categories/i18n/atom.xml" rel="self"/>
   <link href="http://kerrizor.com/"/>
-  <updated>2014-03-31T12:05:57-07:00</updated>
+  <updated>2014-03-31T12:11:30-07:00</updated>
   <id>http://kerrizor.com/</id>
   <author>
     <name><![CDATA[Kerri Miller]]></name>
@@ -18,9 +18,7 @@
     <link href="http://kerrizor.com/blog/2014/03/31/rails-internationalization-i18n/"/>
     <updated>2014-03-31T12:01:32-07:00</updated>
     <id>http://kerrizor.com/blog/2014/03/31/rails-internationalization-i18n</id>
-    <content type="html"><![CDATA[<h2>Internationalization (I18n)</h2>
-
-<p>Rails by default installs support for internationalization (or <em>I18n</em>) through the gem <code>i18n</code>. This gem add support for multiple language dictionaries and translation files, to let you easily change the language your site displays.</p>
+    <content type="html"><![CDATA[<p>Rails by default installs support for internationalization (or <em>I18n</em>) through the gem <code>i18n</code>. This gem add support for multiple language dictionaries and translation files, to let you easily change the language your site displays.</p>
 
 <!-- more -->
 
