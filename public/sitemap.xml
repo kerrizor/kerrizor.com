@@ -2,27 +2,27 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://kerrizor.com/blog/2013/08/02/practice-makes-perfect/</loc>
-        <lastmod>2014-01-05T00:02:44-08:00</lastmod>
+        <lastmod>2014-03-30T21:44:18-07:00</lastmod>
     </url>
     <url>
         <loc>http://kerrizor.com/assets/bootstrap/about.html</loc>
-        <lastmod>2014-01-05T00:02:44-08:00</lastmod>
+        <lastmod>2014-03-30T21:44:18-07:00</lastmod>
     </url>
     <url>
         <loc>http://kerrizor.com/assets/bootstrap/components.html</loc>
-        <lastmod>2014-01-05T00:02:44-08:00</lastmod>
+        <lastmod>2014-03-30T21:44:18-07:00</lastmod>
     </url>
     <url>
         <loc>http://kerrizor.com/assets/bootstrap/css.html</loc>
-        <lastmod>2014-01-05T00:02:44-08:00</lastmod>
+        <lastmod>2014-03-30T21:44:18-07:00</lastmod>
     </url>
     <url>
         <loc>http://kerrizor.com/assets/bootstrap/customize.html</loc>
-        <lastmod>2014-01-05T00:02:44-08:00</lastmod>
+        <lastmod>2014-03-30T21:44:18-07:00</lastmod>
     </url>
     <url>
         <loc>http://kerrizor.com/assets/bootstrap/getting-started.html</loc>
-        <lastmod>2014-01-05T00:02:44-08:00</lastmod>
+        <lastmod>2014-03-30T21:44:18-07:00</lastmod>
     </url>
     <url>
         <loc>http://kerrizor.com/assets/bootstrap/</loc>
@@ -30,18 +30,22 @@
     </url>
     <url>
         <loc>http://kerrizor.com/assets/bootstrap/javascript.html</loc>
-        <lastmod>2014-01-05T00:02:44-08:00</lastmod>
+        <lastmod>2014-03-30T21:44:18-07:00</lastmod>
     </url>
     <url>
         <loc>http://kerrizor.com/blog/archives/</loc>
-        <lastmod>2014-01-05T00:02:44-08:00</lastmod>
+        <lastmod>2014-03-30T21:44:18-07:00</lastmod>
     </url>
     <url>
         <loc>http://kerrizor.com/</loc>
-        <lastmod>2014-01-05T00:02:44-08:00</lastmod>
+        <lastmod>2014-03-30T21:44:18-07:00</lastmod>
+    </url>
+    <url>
+        <loc>http://kerrizor.com/posts/</loc>
+        <lastmod>2014-03-30T21:44:18-07:00</lastmod>
     </url>
     <url>
         <loc>http://kerrizor.com/robots.txt</loc>
-        <lastmod>2014-01-05T00:02:44-08:00</lastmod>
+        <lastmod>2014-03-30T21:44:18-07:00</lastmod>
     </url>
 </urlset>
