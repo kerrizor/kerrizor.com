@@ -1,24 +1,71 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Kerri Miller]]></title>
-  <link href="http://kerrizor.com/atom.xml" rel="self"/>
-  <link href="http://kerrizor.com/"/>
-  <updated>2014-04-02T17:10:15-07:00</updated>
-  <id>http://kerrizor.com/</id>
-  <author>
-    <name><![CDATA[Kerri Miller]]></name>
-    
-  </author>
-  <generator uri="http://octopress.org/">Octopress</generator>
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>A Quick Intro to MongoDB in Rails - Kerri Miller</title>
+  <meta name="author" content="Kerri Miller">
 
   
-  <entry>
-    <title type="html"><![CDATA[A Quick Intro to MongoDB in Rails]]></title>
-    <link href="http://kerrizor.com/blog/2014/04/02/quick-intro-to-mongodb-in-rails/"/>
-    <updated>2014-04-02T17:04:33-07:00</updated>
-    <id>http://kerrizor.com/blog/2014/04/02/quick-intro-to-mongodb-in-rails</id>
-    <content type="html"><![CDATA[<p>By Internet standards, MongoDB is a venerable NoSQL database. <!-- more -->First introduced in 2009, it was designed as a scalable document storage engine. In Mongo, we don&rsquo;t work with tables and rows, we work with <strong>collections</strong> and <strong>documents</strong>. Documents contain JSON/BSON hashes, so any data that can be represented as a hash can be stored in Mongo. Mongo is a <strong>schemaless</strong> database, meaning there&rsquo;s no requirements nor enforcement about the structure of the data in a document.</p>
+  <meta name="description" content="A Quick Intro to MongoDB in Rails written April 2, 2014 in Databases, MongoDB, Rails, Tutorial By Internet standards, MongoDB is a venerable NoSQL &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://kerrizor.com/blog/2014/04/02/quick-intro-to-mongodb-in-rails">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Kerri Miller" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+
+</head>
+
+  <body>
+    <a href="/" class="home-icon">
+      <img src="/images/home.png"/>
+    </a>
+
+    <article role="article" class="full-single-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>A Quick Intro to MongoDB in Rails</h1>
+        <div class="meta">
+          written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2014-04-02T17:04:33-07:00" pubdate data-updated="true">April 2, 2014</time> in 
+          
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/databases/'>Databases</a>, <a class='category' href='/blog/categories/mongodb/'>MongoDB</a>, <a class='category' href='/blog/categories/rails/'>Rails</a>, <a class='category' href='/blog/categories/tutorial/'>Tutorial</a>
+  
+</span>
+
+
+        </div>
+        <p>By Internet standards, MongoDB is a venerable NoSQL database. <!-- more -->First introduced in 2009, it was designed as a scalable document storage engine. In Mongo, we don&rsquo;t work with tables and rows, we work with <strong>collections</strong> and <strong>documents</strong>. Documents contain JSON/BSON hashes, so any data that can be represented as a hash can be stored in Mongo. Mongo is a <strong>schemaless</strong> database, meaning there&rsquo;s no requirements nor enforcement about the structure of the data in a document.</p>
 
 <p>Mongo is able to handle massive data sets quickly and efficiently, and is used by many big data organizations, including Foursquare, bit.ly, and CERN for collecting Large Hadron Collider data.</p>
 
@@ -253,221 +300,51 @@
 <p><strong>Devise with Mondoid</strong></p>
 
 <p><a href="http://railsapps.github.io/tutorial-rails-mongoid-devise.html">http://railsapps.github.io/tutorial-rails-mongoid-devise.html</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Rails Internationalization (I18n)]]></title>
-    <link href="http://kerrizor.com/blog/2014/03/31/rails-internationalization-i18n/"/>
-    <updated>2014-03-31T12:01:32-07:00</updated>
-    <id>http://kerrizor.com/blog/2014/03/31/rails-internationalization-i18n</id>
-    <content type="html"><![CDATA[<p>Rails by default installs support for internationalization (or <em>I18n</em>) through the gem <code>i18n</code>. This gem add support for multiple language dictionaries and translation files, to let you easily change the language your site displays.</p>
 
-<!-- more -->
-
-
-<p>As you can imagine, I18n is a complex problem, since human languages differ in so many ways (pluralization, grammar, etc.) The Rails I18n API isn&rsquo;t perfect, but it does a fairly good job focusing on supporting English and other similar languages, and provides a framework to add support for languages that fall outside the paradigm of those (Japanese, Tagalog, or Hebrew, for example.)</p>
-
-<h2>Getting Started</h2>
-
-<p>Let&rsquo;s build a new Rails app and create a simple &ldquo;hello world&rdquo; page.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ rails new i18n_demo
-</span><span class='line'>$ cd i18n_demo
-</span><span class='line'>$ rails g controller welcome</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I add a simple <code>views/welcome/index.html.erb</code> template, and we get a page that says &ldquo;Hello World&rdquo;. Now, let&rsquo;s use a translation dictionary to render this string.</p>
-
-<p><em>welcome.html.erb</em>:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="cp">&lt;%=</span> <span class="n">t</span><span class="p">(</span><span class="ss">:hello</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x"></span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><em>config/locales/en.yml</em>:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">en</span><span class="p-Indicator">:</span>
-</span><span class='line'>  <span class="l-Scalar-Plain">hello</span><span class="p-Indicator">:</span> <span class="s">&quot;Hello</span><span class="nv"> </span><span class="s">world&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>We reload the page, and magic! Rails loads the string from the translation file.</p>
-
-<p>Let&rsquo;s set this app up to give us this page in French. First, let&rsquo;s make a new translations file:</p>
-
-<p><em>config/locales/fr.yml</em>:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">fr</span><span class="p-Indicator">:</span>
-</span><span class='line'>  <span class="l-Scalar-Plain">hello</span><span class="p-Indicator">:</span> <span class="s">&quot;Bonjour!&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>There&rsquo;s a variety of ways to tell our Rails application we want to change from the default language (which is English.) For the purposes of this demonstration, we&rsquo;ll use a simple query string.</p>
-
-<p><em>app/controllers/application_controller.rb</em>:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">before_action</span> <span class="ss">:set_locale</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">def</span> <span class="nf">set_locale</span>
-</span><span class='line'>  <span class="no">I18n</span><span class="o">.</span><span class="n">locale</span> <span class="o">=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:locale</span><span class="o">]</span> <span class="o">||</span> <span class="no">I18n</span><span class="o">.</span><span class="n">default_locale</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Let&rsquo;s restart our server, and append <code>?locale=fr</code> to our URL and see what happens.</p>
-
-<p>Awesome!</p>
-
-<p>We could define a translation file for any language; we&rsquo;re not limited to just the 2 letter language abbreviations!</p>
-
-<p><em>config/locales/pirate.yml</em>:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">pirate</span><span class="p-Indicator">:</span>
-</span><span class='line'>  <span class="l-Scalar-Plain">hello</span><span class="p-Indicator">:</span> <span class="s">&quot;Ahoy</span><span class="nv"> </span><span class="s">mateys!&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>By starting with I18n early in an app, its fairly easy to add new language support to your application. Generally its a matter of taking an existing translations file and sending it to a translator to interpret the strings for you, then adding it to your repo.</p>
-
-<p>Of course, nothing is ever that simple.</p>
-
-<h2>Interpolation</h2>
-
-<p>What if we wanted to greet a user by name?</p>
-
-<p><em>config/locales/en.yml</em>:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">en</span><span class="p-Indicator">:</span>
-</span><span class='line'>  <span class="l-Scalar-Plain">hello_name</span><span class="p-Indicator">:</span> <span class="s">&#39;Hello,</span><span class="nv"> </span><span class="s">%{name}!&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><em>app/views/welcome/index.html.erb</em>:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="cp">&lt;%=</span> <span class="n">t</span><span class="p">(</span><span class="ss">:hello_name</span><span class="p">,</span> <span class="nb">name</span><span class="p">:</span> <span class="s2">&quot;Kerri&quot;</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x"></span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>We&rsquo;re just putting a string in here, but it could easily be a value from an object. For example:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="cp">&lt;%=</span> <span class="n">t</span><span class="p">(</span><span class="ss">:hello_name</span><span class="p">,</span> <span class="nb">name</span><span class="p">:</span> <span class="n">current_user</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x"></span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>While this solution generally works fine, you may be able to already see how this is potentially a sticky situation, depending on the language!</p>
-
-<h2>Pluralization</h2>
-
-<p>The other situation that comes up that causes some problems is pluralization.</p>
-
-<p><em>config/locales/en.yml</em>:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">inbox</span><span class="p-Indicator">:</span>
-</span><span class='line'>  <span class="l-Scalar-Plain">zero</span><span class="p-Indicator">:</span> <span class="s">&#39;You</span><span class="nv"> </span><span class="s">have</span><span class="nv"> </span><span class="s">no</span><span class="nv"> </span><span class="s">messages&#39;</span>
-</span><span class='line'>  <span class="l-Scalar-Plain">one</span><span class="p-Indicator">:</span> <span class="s">&#39;You</span><span class="nv"> </span><span class="s">have</span><span class="nv"> </span><span class="s">one</span><span class="nv"> </span><span class="s">message&#39;</span>
-</span><span class='line'>  <span class="l-Scalar-Plain">other</span><span class="p-Indicator">:</span> <span class="s">&#39;You</span><span class="nv"> </span><span class="s">have</span><span class="nv"> </span><span class="s">%{count}</span><span class="nv"> </span><span class="s">messages&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><em>app/views/welcome/index.html.erb</em>:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="cp">&lt;%=</span> <span class="n">t</span><span class="p">(</span><span class="ss">:inbox</span><span class="p">,</span> <span class="ss">count</span><span class="p">:</span> <span class="mi">2</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x"></span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Magic!</p>
-
-<h2>Resources</h2>
-
-<p><a href="http://guides.rubyonrails.org/i18n.html">Rails Guides &ndash; I18N</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Practice Makes Perfect]]></title>
-    <link href="http://kerrizor.com/blog/2013/08/02/practice-makes-perfect/"/>
-    <updated>2013-08-02T14:58:00-07:00</updated>
-    <id>http://kerrizor.com/blog/2013/08/02/practice-makes-perfect</id>
-    <content type="html"><![CDATA[<p><em>This post originally appeared on the <a href="http://www.bluebox.net/about/blog/2012/06/practice-make-perfect/">Blue Box blog</a></em></p>
-
-<p>Contrary to popular belief, there is no such thing as “on the job training.” The skills that differentiate senior and lead developers from the herd don’t come from sheer number hours spent simply doing the job. You will pick up a lot of exposure to concepts, techniques, and processes that way, but without focused, deliberate practice, you’re just spinning your wheels.</p>
-
-<!-- more -->
-
-
-<p>When you’re working, the goals are to accomplish the task, avoid failure, and get things done. Space to truly engage in learning is incidental. You are in the closed mode; “don’t distract me, I’m on a mission!” Practice, on the other hand, is about working on a problem with the idea of exploring the problem area, of learning something, and your goal, oddly enough, is to Deliberately Fail.</p>
-
-<p>At Blue Box Group, we have the usual geek clubhouse toys — a MAME cabinet with 1200+ video games, ping-pong, a kegerator (with two varieties of beer!), and a rather nice billiards table, which is our primary obsession these days. Not content with the classic pool hall games of 8-ball, 9-ball, or cut-throat, we play a peculiar game invented by our Principal Technologist we call “Calvin Pool.” The rules are simple – after the break, the person whose turn it is has to attempt to simply hit whichever ball on the table their opponent chooses with the cue ball. There are a few wrinkles, naturally, but more or less the game boils down to “try to make the most difficult shot possible.”</p>
-
-<p>I can’t even begin to tell you how much my game has improved in the last few weeks. I’m making shots that long stymied me, shots that intimidate and impress people who are occasional players of the game. The practice of setting myself up to fail and practicing the difficult, exploring the various possible approaches to seemingly impossible problems, has made me confident when dealing with the easy obstacles.</p>
-
-<p>Similarly, when practicing programming, you need to challenge yourself to learn through exploration and trials, and accept that, as often as not, failure is going to be your ultimate outcome. If you’re not failing, you’re not practicing – you’re just warming up. So, how does someone practice the art and skill of programming? Here are a couple ideas.</p>
-
-<h3>Limit yourself</h3>
-
-<p>Decide for an afternoon, a day, or even a week, you’re going to use a technique you’re unfamiliar with. Make life hard for yourself on purpose.</p>
-
-<ul>
-<li>MONKEY PATCH ALL THE THINGS!</li>
-<li>Make everything a gem</li>
-<li>TDD the living snot out of the next bug you fix</li>
-<li>Use an IDE you don’t normally use for a month</li>
-<li>Don’t use the letter ‘G’</li>
-<li>Make all actions happen through observers</li>
-</ul>
-
-
-<p>By forcing yourself to find new patterns to solve your problems, you’ll quickly run into the current limits of your knowledge and experience, and push out past them.</p>
-
-<h3>Have some fun while doing something dumb!</h3>
-
-<p>Extend your practice by choosing a simple problem and keep solving it in new ways. Each time, add complications and obstructions. Solve a problem over and over, with new obstacles. For instance, let’s take this User Story as a place to start:</p>
-
-<p>“The user will be able to convert a temperature in Celsius to Fahrenheit, and vice versa.”</p>
-
-<p>Simple enough. Five minutes (or less) of Googling will turn up a myriad of solutions, and give you the basic math. Start with making it a small command-line app – easy-peasy lemon-squeezy! Once that’s done (you did tests, too, right?), let’s mutate it and iterate:</p>
-
-<ul>
-<li>Make it a gem</li>
-<li>Release it on Github</li>
-<li>Make it a website</li>
-<li>Make it a mix-in on Numeric</li>
-<li>Make it a web service</li>
-<li>Find other temperature scales you could convert to and from</li>
-<li>Have it attempt to resolve the user’s location via browser location or IP address, and give automated temperature conversions</li>
-<li>Have it query wikipedia (or other data source) to offer information about the resulting temperature – trivia, facts, elements that melt or ignite or freeze at that temp, etc</li>
-<li>Have it record the average, median, and min/max the user has calculated, and say witty things as milestones are passed</li>
-<li>…</li>
-</ul>
-
-
-<p>Practice doesn’t have to be about flash cards and rote memorization. Try a little learning-by-doing, by applying concepts and techniques you want to try to your daily workflow but haven’t found the time for. Get your hands dirty and stretch outside your comfort zone, and approach previously solved and well-understood problems from a fresh perspective, to truly discover the benefits (and drawbacks) of approaches you’re unfamiliar with.</p>
-]]></content>
-  </entry>
-  
-</feed>
+      </div>
+    </div>
+  </div>
+</article>
+
+<hr class="divider-short"/>
+
+<div class="archive-link">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        
+          <a class="pull-left" href="/blog/2014/03/31/rails-internationalization-i18n/" title="Previous Post: Rails Internationalization (I18n)">&laquo; Previous: Rails Internationalization (I18n)</a>
+        
+
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="her-row">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1">
+  <a href="/"><h4>Home</h4></a>
+</div>
+
+<div class="col-md-2">
+  <div class="social-icon-list">
+    <a href="https://twitter.com/kerrizor"><img src="/images/glyphicons_social_31_twitter.png"/></a>
+    <a href="https://github.com/kerrizor"><img src="/images/glyphicons_social_21_github.png"/></a>
+    <a href="mailto:kerrizor@kerrizor.com"><img src="/images/glyphicons_social_39_e-mail.png"/></a>
+  </div>
+</div>
+
+<div class="pull-right">
+  <h4>Powered by <a href="http://octopress.org/">Octopress</a>. Designed by <a href="http://AdrianArtiles.com" target="adrian">Adrian Artiles</a>.</h4>
+</div>
+
+
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>

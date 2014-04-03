@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Rails | Kerri Miller]]></title>
   <link href="http://kerrizor.com/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://kerrizor.com/"/>
-  <updated>2014-03-31T12:11:30-07:00</updated>
+  <updated>2014-04-02T17:10:15-07:00</updated>
   <id>http://kerrizor.com/</id>
   <author>
     <name><![CDATA[Kerri Miller]]></name>
@@ -12,6 +12,210 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[A Quick Intro To MongoDB In Rails]]></title>
+    <link href="http://kerrizor.com/blog/2014/04/02/quick-intro-to-mongodb-in-rails/"/>
+    <updated>2014-04-02T17:04:33-07:00</updated>
+    <id>http://kerrizor.com/blog/2014/04/02/quick-intro-to-mongodb-in-rails</id>
+    <content type="html"><![CDATA[<p>By Internet standards, MongoDB is a venerable NoSQL database. <!-- more -->First introduced in 2009, it was designed as a scalable document storage engine. In Mongo, we don&rsquo;t work with tables and rows, we work with <strong>collections</strong> and <strong>documents</strong>. Documents contain JSON/BSON hashes, so any data that can be represented as a hash can be stored in Mongo. Mongo is a <strong>schemaless</strong> database, meaning there&rsquo;s no requirements nor enforcement about the structure of the data in a document.</p>
+
+<p>Mongo is able to handle massive data sets quickly and efficiently, and is used by many big data organizations, including Foursquare, bit.ly, and CERN for collecting Large Hadron Collider data.</p>
+
+<h2>Installation</h2>
+
+<p>This is fairly straight forward using homebrew.</p>
+
+<p><code>ruby
+$ brew install mongodb
+</code></p>
+
+<p>When it finishes, it will print out some information on setting up Mongo to start whenever you start your computer. I&rsquo;m not a huge fan of that. Here&rsquo;s what I use:</p>
+
+<p><code>ruby
+$ brew services start mongodb
+</code></p>
+
+<p>..and to stop it:</p>
+
+<p><code>ruby
+$ brew services stop mongodb
+</code></p>
+
+<h2>Mongo and Rails</h2>
+
+<p>Let&rsquo;s make a new Rails application, but specify that we do NOT want Active Record installed.</p>
+
+<p><code>
+$ rails new mongo-people --skip-active-record
+</code></p>
+
+<p><code>cd</code> into the project, and edit the Gemfile, add this line:</p>
+
+<p><code>ruby
+gem "mongoid", git: 'git://github.com/mongoid/mongoid.git'
+</code></p>
+
+<p>Save, and then run</p>
+
+<p><code>
+$ bundle install
+</code></p>
+
+<p>Just as when using a relational DB such as SQLite, Postgres, or MySQL, we need a configuration file. Mongoid installs a custom Rails generator for us. Run:</p>
+
+<p><code>
+$ rails generate mongoid:config
+</code></p>
+
+<p>Open up the file it creates, located at <code>config/mongoid.yml</code> and take a look. Take note of the different options we <em>could</em> configure. Don&rsquo;t make any changes at this time; its enough to just take a look at what the generator created on our behalf.</p>
+
+<p>At this point, I like to run <code>rails s</code> and make sure the server starts, that everything is all hunkey-dorey. Once you&rsquo;ve checked in a browser that Rails is at least starting up correctly, let&rsquo;s make a new git repo and check in what we&rsquo;ve got so far.</p>
+
+<p>Let&rsquo;s get started. Since this is a demonstration, let&rsquo;s cheat a little bit and use Rails' scaffolding generators to get us started.</p>
+
+<p><code>
+$ rails generate scaffold person name street city state
+</code></p>
+
+<p>Use <code>git status</code> to see what the command generated. It should all look pretty normal.. but let&rsquo;s take a look at the model it generated.</p>
+
+<p><code>ruby
+class Person
+  include Mongoid::Document
+  field :name, type: String
+  field :street, type: String
+  field :city, type: String
+  field :state, type: String
+end
+</code></p>
+
+<p>Quite different! MongoDB doesn&rsquo;t have a database schema, so no database migrations are needed. If we want a new field, we could just declare one in the model and add it to our views. Migrations are occasionally used, but they&rsquo;re for data migration or transformation, not changing the structure of the database.</p>
+
+<p>Let&rsquo;s fire up our Rails server and visit the scaffolded route (at <code>http://localhost:3000/people</code>) There we see the vanilla Rails CRUD forms. Let&rsquo;s add a person.. and look at the URL in the show page &ndash; weird! We&rsquo;re used to seeing incrementing IDs created for us by the database. Each row that is added to the table increments the row counter by exactly 1, so we might say that each row has a locally unique sequential identifier.</p>
+
+<p>MongoDB uses these weird looking hashes of alphanumerics like &ldquo;532e2ba7546f6c30aa000000&rdquo;. This <strong>Object ID</strong> is always 12 bytes, composed of a timestamp, client machine id, client process id, and a 3-byte incremented counter.</p>
+
+<h2>Documents</h2>
+
+<p>Let&rsquo;s take a look at what a document looks like.</p>
+
+<p>You may have seen command line interfaces for PostgreSQL, so it shouldn&rsquo;t come as a shock that MongoDB offers one as well. In a terminal window:</p>
+
+<p><code>
+$ mongo mongo_people_development
+</code></p>
+
+<p>Note that I found the name of our database by looking at <code>config/mongoid.yml</code>.</p>
+
+<p>Mongo uses its own special command language for working with its data. If you get stuck, just type <code>help</code>.</p>
+
+<p>First, let&rsquo;s take a look at the collections in this database.
+```javascript</p>
+
+<blockquote><p>show collections
+people
+system.indexes</p>
+
+<p>```</p></blockquote>
+
+<p>To find a record, the format is <code>db.[collection].find()</code></p>
+
+<p>```javascript</p>
+
+<blockquote><p>db.people.find()
+{ &ldquo;<em>id&rdquo; : ObjectId(&ldquo;532e2ba7546f6c30aa000000&rdquo;), &ldquo;name&rdquo; : &ldquo;Kerri Miller&rdquo;, &ldquo;street&rdquo; : &ldquo;123 Main Street&rdquo;, &ldquo;city&rdquo; : &ldquo;SEATTLE&rdquo;, &ldquo;state&rdquo; : &ldquo;WA&rdquo; }
+db.people.find({&ldquo;state&rdquo;:&ldquo;WA&rdquo;})
+{ &ldquo;</em>id&rdquo; : ObjectId(&ldquo;532e2ba7546f6c30aa000000&rdquo;), &ldquo;name&rdquo; : &ldquo;Kerri Miller&rdquo;, &ldquo;street&rdquo; : &ldquo;123 Main Street&rdquo;, &ldquo;city&rdquo; : &ldquo;SEATTLE&rdquo;, &ldquo;state&rdquo; : &ldquo;WA&rdquo; }</p>
+
+<p>```</p></blockquote>
+
+<p>Note that the first command returned ALL documents in the collection, we just happened to only have one document, so that&rsquo;s all that was returned.</p>
+
+<p>Remember when I said that MongoDB stores everything as JSON? Mongo actually uses JavaScript here in the command line.</p>
+
+<p>```javascript</p>
+
+<blockquote><p>typeof db
+object
+typeof db.people
+object
+typeof db.people.find
+function</p>
+
+<p>```</p></blockquote>
+
+<p>If we want to see what the code for a Mongo command looks like, we can call the function without parenthesis.</p>
+
+<p>```javascript</p>
+
+<blockquote><p>db.people.find
+function ( query , fields , limit , skip, batchSize, options ){</p>
+
+<pre><code>var cursor = new DBQuery( this._mongo , this._db , this ,
+                    this._fullName , this._massageObject( query ) , fields , limit , skip , batchSize , options || this.getQueryOptions() );
+</code></pre></blockquote>
+
+<pre><code>var connObj = this.getMongo();
+var readPrefMode = connObj.getReadPrefMode();
+if (readPrefMode != null) {
+    cursor.readPref(readPrefMode, connObj.getReadPrefTagSet());
+}
+
+return cursor;
+</code></pre>
+
+<p>}</p>
+
+<blockquote><p>```</p></blockquote>
+
+<h2>Wrapping Up</h2>
+
+<h3>Why MongoDB?</h3>
+
+<p>MongoDB is designed to be highly-scalable and flexible, but remain familiar enough that application developers could use it easily. Working with Mongo is mostly the same as working with a traditional RDBMS (except for being unable to do server-side JOINs between two sets of data..)</p>
+
+<p>Because it can&rsquo;t do server-side JOINs, the relationships between different objects (Users have Posts, Posts have Comments, Comments have Users) can be tricky, as you need to set up those relationships in the model.</p>
+
+<h3>Why not MongoDB?</h3>
+
+<p>How MongoDB encourages denormalization of schemas (by not having any) might be a little too much for some to swallow. Some developers find the cold, hard constraints of a relational database reassuring.</p>
+
+<p>Although sometimes restrictive, a database schema and the restraints it places on our data can be reassuring and useful. While MongoDB offers a huge increase in scalability and speed of record retrieval, its inability to relate documents from 2 different collections &mdash; the key strength of a RDBMS &mdash; makes it often not the best case for a CRUD-focused web application.</p>
+
+<p>Because MongoDB is focused on large datasets, it works best in large clusters, which can be a pain to design and manage.</p>
+
+<h2>Resources</h2>
+
+<p><strong>Why I think Mongo is to Databases what Rails was to Frameworks</strong></p>
+
+<p>Meaty blog post from John Nunemaker on why you should use MongoDB
+<a href="http://www.railstips.org/blog/archives/2009/12/18/why-i-think-mongo-is-to-databases-what-rails-was-to-frameworks/">http://www.railstips.org/blog/archives/2009/12/18/why-i-think-mongo-is-to-databases-what-rails-was-to-frameworks/</a></p>
+
+<p><strong>Why you should never use MongoDB</strong></p>
+
+<p>Lengthy blog post by Sarah Mei on the Discourse project&rsquo;s use of MongoDB, and why they ultimately migrated to PostgreSQL. The comments are actually worth reading.
+<a href="http://www.sarahmei.com/blog/2013/11/11/why-you-should-never-use-mongodb/">http://www.sarahmei.com/blog/2013/11/11/why-you-should-never-use-mongodb/</a></p>
+
+<p><strong>Mongoid Gem</strong></p>
+
+<p>Good documentation about working with MongoDB from a Ruby and RoR perspective
+<a href="http://mongoid.org/en/mongoid/">http://mongoid.org/en/mongoid/</a></p>
+
+<p><strong>Railscast on Mongoid</strong></p>
+
+<p><a href="http://railscasts.com/episodes/238-mongoid">http://railscasts.com/episodes/238-mongoid</a></p>
+
+<p><strong>Railscast on MongoDB</strong></p>
+
+<p>This one is a bit dated but worth a read-through.
+<a href="http://railscasts.com/episodes/194-mongodb-and-mongomapper">http://railscasts.com/episodes/194-mongodb-and-mongomapper</a></p>
+
+<p><strong>Devise with Mondoid</strong></p>
+
+<p><a href="http://railsapps.github.io/tutorial-rails-mongoid-devise.html">http://railsapps.github.io/tutorial-rails-mongoid-devise.html</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Rails Internationalization (I18n)]]></title>

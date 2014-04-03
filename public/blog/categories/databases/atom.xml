@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Tutorial | Kerri Miller]]></title>
-  <link href="http://kerrizor.com/blog/categories/tutorial/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Databases | Kerri Miller]]></title>
+  <link href="http://kerrizor.com/blog/categories/databases/atom.xml" rel="self"/>
   <link href="http://kerrizor.com/"/>
   <updated>2014-04-02T17:10:15-07:00</updated>
   <id>http://kerrizor.com/</id>
@@ -214,125 +214,6 @@ return cursor;
 <p><strong>Devise with Mondoid</strong></p>
 
 <p><a href="http://railsapps.github.io/tutorial-rails-mongoid-devise.html">http://railsapps.github.io/tutorial-rails-mongoid-devise.html</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Rails Internationalization (I18n)]]></title>
-    <link href="http://kerrizor.com/blog/2014/03/31/rails-internationalization-i18n/"/>
-    <updated>2014-03-31T12:01:32-07:00</updated>
-    <id>http://kerrizor.com/blog/2014/03/31/rails-internationalization-i18n</id>
-    <content type="html"><![CDATA[<p>Rails by default installs support for internationalization (or <em>I18n</em>) through the gem <code>i18n</code>. This gem add support for multiple language dictionaries and translation files, to let you easily change the language your site displays.</p>
-
-<!-- more -->
-
-
-<p>As you can imagine, I18n is a complex problem, since human languages differ in so many ways (pluralization, grammar, etc.) The Rails I18n API isn&rsquo;t perfect, but it does a fairly good job focusing on supporting English and other similar languages, and provides a framework to add support for languages that fall outside the paradigm of those (Japanese, Tagalog, or Hebrew, for example.)</p>
-
-<h2>Getting Started</h2>
-
-<p>Let&rsquo;s build a new Rails app and create a simple &ldquo;hello world&rdquo; page.</p>
-
-<p><code>
-$ rails new i18n_demo
-$ cd i18n_demo
-$ rails g controller welcome
-</code>
-I add a simple <code>views/welcome/index.html.erb</code> template, and we get a page that says &ldquo;Hello World&rdquo;. Now, let&rsquo;s use a translation dictionary to render this string.</p>
-
-<p><em>welcome.html.erb</em>:
-<code>erb
-&lt;%= t(:hello) %&gt;
-</code></p>
-
-<p><em>config/locales/en.yml</em>:
-<code>yml
-en:
-  hello: "Hello world"
-</code></p>
-
-<p>We reload the page, and magic! Rails loads the string from the translation file.</p>
-
-<p>Let&rsquo;s set this app up to give us this page in French. First, let&rsquo;s make a new translations file:</p>
-
-<p><em>config/locales/fr.yml</em>:
-<code>yml
-fr:
-  hello: "Bonjour!"
-</code></p>
-
-<p>There&rsquo;s a variety of ways to tell our Rails application we want to change from the default language (which is English.) For the purposes of this demonstration, we&rsquo;ll use a simple query string.</p>
-
-<p><em>app/controllers/application_controller.rb</em>:
-```ruby
-before_action :set_locale</p>
-
-<p>def set_locale
-  I18n.locale = params[:locale] || I18n.default_locale
-end
-```</p>
-
-<p>Let&rsquo;s restart our server, and append <code>?locale=fr</code> to our URL and see what happens.</p>
-
-<p>Awesome!</p>
-
-<p>We could define a translation file for any language; we&rsquo;re not limited to just the 2 letter language abbreviations!</p>
-
-<p><em>config/locales/pirate.yml</em>:
-<code>yml
-pirate:
-  hello: "Ahoy mateys!"
-</code></p>
-
-<p>By starting with I18n early in an app, its fairly easy to add new language support to your application. Generally its a matter of taking an existing translations file and sending it to a translator to interpret the strings for you, then adding it to your repo.</p>
-
-<p>Of course, nothing is ever that simple.</p>
-
-<h2>Interpolation</h2>
-
-<p>What if we wanted to greet a user by name?</p>
-
-<p><em>config/locales/en.yml</em>:
-<code>yml
-en:
-  hello_name: 'Hello, %{name}!'
-</code></p>
-
-<p><em>app/views/welcome/index.html.erb</em>:
-<code>erb
-&lt;%= t(:hello_name, name: "Kerri") %&gt;
-</code></p>
-
-<p>We&rsquo;re just putting a string in here, but it could easily be a value from an object. For example:</p>
-
-<p><code>erb
-&lt;%= t(:hello_name, name: current_user.name) %&gt;
-</code></p>
-
-<p>While this solution generally works fine, you may be able to already see how this is potentially a sticky situation, depending on the language!</p>
-
-<h2>Pluralization</h2>
-
-<p>The other situation that comes up that causes some problems is pluralization.</p>
-
-<p><em>config/locales/en.yml</em>:
-<code>yml
-inbox:
-  zero: 'You have no messages'
-  one: 'You have one message'
-  other: 'You have %{count} messages'
-</code></p>
-
-<p><em>app/views/welcome/index.html.erb</em>:
-<code>erb
-&lt;%= t(:inbox, count: 2) %&gt;
-</code></p>
-
-<p>Magic!</p>
-
-<h2>Resources</h2>
-
-<p><a href="http://guides.rubyonrails.org/i18n.html">Rails Guides &ndash; I18N</a></p>
 ]]></content>
   </entry>
   
