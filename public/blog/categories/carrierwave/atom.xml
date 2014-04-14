@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: CarrierWave | Kerri Miller]]></title>
+  <link href="http://kerrizor.com/blog/categories/carrierwave/atom.xml" rel="self"/>
+  <link href="http://kerrizor.com/"/>
+  <updated>2014-04-13T23:59:33-07:00</updated>
+  <id>http://kerrizor.com/</id>
+  <author>
+    <name><![CDATA[Kerri Miller]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[CarrierWave and S3]]></title>
+    <link href="http://kerrizor.com/blog/2014/04/13/carrierwave-and-s3/"/>
+    <updated>2014-04-13T15:13:22-07:00</updated>
+    <id>http://kerrizor.com/blog/2014/04/13/carrierwave-and-s3</id>
+    <content type="html"><![CDATA[<p>CarrierWave is a gem that adds a fairly simple and flexible way to users to upload files to our Rails application. <!-- more --> It also lets us resize images to make thumbnails and other sizes as we need them, and lets us upload all these uploaded (and generated) files to cloud storage products, such as S3.</p>
+
+<h2>How-to</h2>
+
+<h3>Make an S3 bucket</h3>
+
+<p>S3 &mdash; Simple Storage Service
+&ldquo;buckets&rdquo; are like folders</p>
+
+<p>Let&rsquo;s start with a new Rails app</p>
+
+<p><code>bash
+$ rails new band_practice
+$ cd band_practice
+$ rails g scaffold band name genre
+$ rake db:migrate
+</code></p>
+
+<h3>Setup CarrierWave and Fog Gems</h3>
+
+<p>Fog is a gem that helps us work with <em>cloud services</em> like those from Amazon &ndash; EC2 or S3 &ndash; as well as cloud offerings from other companies (like Microsoft, Rackspace, Blue Box, etc).</p>
+
+<p><code>ruby
+gem 'carrierwave'
+gem 'fog'
+gem 'figaro'
+</code></p>
+
+<p>Might as well set up Figaro now, too.</p>
+
+<p><code>
+$ rails g figaro:install
+</code></p>
+
+<h3>Add An Uploader</h3>
+
+<p>Now you need a uploader. This is the file which has all the settings like which folder the image will be saved, setting the image quality, caching etc.</p>
+
+<p><code>bash
+$ rails g uploader image
+</code></p>
+
+<p>The generator creates a new directory called <code>uploaders</code> under the <code>app</code> directory and in it a file called <code>image_uploader.rb</code>. In this file are a number of comments explaining how to customize the uploader. For example there is code to change the upload location, perform processing on the image after uploading and to restrict the type of files that can be uploaded. You should take a look at these options on your own, but for demonstration purposes we&rsquo;re going to get rid of most of it in favor of this:</p>
+
+<p>```ruby
+class ImageUploader &lt; CarrierWave::Uploader::Base
+  include CarrierWave::MiniMagick</p>
+
+<p>  def store_dir</p>
+
+<pre><code>"uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+</code></pre>
+
+<p>  end</p>
+
+<p>  version :thumb do</p>
+
+<pre><code>process :resize_to_fit =&gt; [32, 32]
+</code></pre>
+
+<p>  end</p>
+
+<p>  version :preview do</p>
+
+<pre><code>process :resize_to_fit =&gt; [256, 256]
+</code></pre>
+
+<p>  end</p>
+
+<p>  version :full do</p>
+
+<pre><code>process :resize_to_fit =&gt; [2048, 2048]
+</code></pre>
+
+<p>  end
+end</p>
+
+<p>```</p>
+
+<p>Next we&rsquo;ll need to add the uploader to the <code>Band</code> model. We&rsquo;ll need a column in the bands table to store it in so we&rsquo;ll generate a migration to do add it.</p>
+
+<p><code>bash
+ $ rails g migration add_image_to_bands image:string
+ $ rake db:migrate
+</code></p>
+
+<p>Then, we <em>mount</em> the uploader on the <code>Band</code> model.</p>
+
+<p><code>ruby
+class Band &lt; ActiveRecord::Base
+  mount_uploader :image, ImageUploader
+end
+</code></p>
+
+<p>Add a <code>file_field</code> to the Band form.</p>
+
+<p>app/views/bands/_form.html.erb
+```ruby</p>
+
+<div class="field">
+  <%= f.label :image %><br>
+  <%= f.file_field :image %>
+</div>
+
+
+<p>```</p>
+
+<p>We add <code>:image</code> to the strong params for the controller.</p>
+
+<p>app/controllers/bands_controller.rb
+<code>ruby
+def band_params
+  params.require(:band).permit(:name, :genre, :image)
+end
+</code></p>
+
+<p>Finally, we modify the scaffolded form and show pages to include a form element for the image upload, and modify the <code>form_for</code> to add an <code>:html</code> option.</p>
+
+<p>apps/views/bands/show.html.erb
+```ruby</p>
+
+<p><p>
+  &lt;%= image_tag @band.image_url.to_s %>
+</p>
+```</p>
+
+<p>Now we can upload images &ndash; yay! In your terminal, take a look at <code>public/uploads</code> &ndash; <code>mini_magick</code> and <code>carrierwave</code> made all those files for us! We have access to these different sizes by passing the symbol of the size (as defined in our uploader model) to <code>#image_url</code></p>
+
+<p>app/views/bands/show.html.erb
+<code>ruby
+&lt;p&gt;
+  &lt;%= image_tag @band.image_url(:thumb).to_s %&gt;
+&lt;/p&gt;
+</code></p>
+
+<h2>Uploading to S3</h2>
+
+<p>This is cool, but we want to save to S3 instead of the local file system. This is pretty easy. First, we need to tell CarrierWave that we want to use S3. Make a new initializer, <code>config/initializers/carrierwave.rb</code></p>
+
+<p>```ruby
+CarrierWave.configure do |config|
+  config.fog_credentials = {</p>
+
+<pre><code>provider:               'AWS',
+aws_access_key_id:      ENV['S3_KEY'],
+aws_secret_access_key:  ENV['S3_SECRET'],
+</code></pre>
+
+<p>  }</p>
+
+<p>  # For testing, upload files to local <code>tmp</code> folder.
+  if Rails.env.test? || Rails.env.cucumber?</p>
+
+<pre><code>config.storage           = :file
+config.enable_processing = false
+config.root              = "#{Rails.root}/tmp"
+</code></pre>
+
+<p>  else</p>
+
+<pre><code>config.storage = :fog
+</code></pre>
+
+<p>  end</p>
+
+<p>  config.cache_dir        = &ldquo;#{Rails.root}/tmp/uploads&rdquo; # To let CarrierWave work on Heroku
+  config.fog_directory    = ENV[&lsquo;S3_BUCKET_NAME&rsquo;]
+end
+```</p>
+
+<p>We also need to fill out our <code>config/application.yml</code> file. We can get the secret information from the <em>Security Credentials</em> screen in the AWS dashboard &ndash; I won&rsquo;t go into how to fetch this information here, as its likely to change from time to time.</p>
+
+<h2>Resources</h2>
+
+<p><a href="http://railscasts.com/episodes/253-carrierwave-file-uploads?view=asciicast">Railscasts #253 CarrierWave File Uploads</a></p>
+
+<p><a href="http://railscasts.com/episodes/383-uploading-to-amazon-s3?view=asciicast">Railscasts #383 Uploading to Amazon S3</a></p>
+
+<p><a href="http://richonrails.com/articles/allowing-file-uploads-with-carrierwave">Allowing File Uploads with CarrierWave</a></p>
+
+<p><a href="http://www.javahabit.com/2012/06/03/saving-files-in-amazon-s3-using-carrierwave-and-fog-gem/">Saving files in Amazon S3 using CarrierWave and Fog Gem</a></p>
+]]></content>
+  </entry>
+  
+</feed>

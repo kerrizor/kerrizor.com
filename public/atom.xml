@@ -4,7 +4,7 @@
   <title><![CDATA[Kerri Miller]]></title>
   <link href="http://kerrizor.com/atom.xml" rel="self"/>
   <link href="http://kerrizor.com/"/>
-  <updated>2014-04-12T10:06:33-07:00</updated>
+  <updated>2014-04-13T23:59:33-07:00</updated>
   <id>http://kerrizor.com/</id>
   <author>
     <name><![CDATA[Kerri Miller]]></name>
@@ -12,6 +12,238 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[CarrierWave and S3]]></title>
+    <link href="http://kerrizor.com/blog/2014/04/13/carrierwave-and-s3/"/>
+    <updated>2014-04-13T15:13:22-07:00</updated>
+    <id>http://kerrizor.com/blog/2014/04/13/carrierwave-and-s3</id>
+    <content type="html"><![CDATA[<p>CarrierWave is a gem that adds a fairly simple and flexible way to users to upload files to our Rails application. <!-- more --> It also lets us resize images to make thumbnails and other sizes as we need them, and lets us upload all these uploaded (and generated) files to cloud storage products, such as S3.</p>
+
+<h2>How-to</h2>
+
+<h3>Make an S3 bucket</h3>
+
+<p>S3 &mdash; Simple Storage Service
+&ldquo;buckets&rdquo; are like folders</p>
+
+<p>Let&rsquo;s start with a new Rails app</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rails new band_practice
+</span><span class='line'><span class="nv">$ </span><span class="nb">cd </span>band_practice
+</span><span class='line'><span class="nv">$ </span>rails g scaffold band name genre
+</span><span class='line'><span class="nv">$ </span>rake db:migrate
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Setup CarrierWave and Fog Gems</h3>
+
+<p>Fog is a gem that helps us work with <em>cloud services</em> like those from Amazon &ndash; EC2 or S3 &ndash; as well as cloud offerings from other companies (like Microsoft, Rackspace, Blue Box, etc).</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s1">&#39;carrierwave&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;fog&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;figaro&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Might as well set up Figaro now, too.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">rails</span> <span class="n">g</span> <span class="ss">figaro</span><span class="p">:</span><span class="n">install</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Add An Uploader</h3>
+
+<p>Now you need a uploader. This is the file which has all the settings like which folder the image will be saved, setting the image quality, caching etc.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rails g uploader image
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The generator creates a new directory called <code>uploaders</code> under the <code>app</code> directory and in it a file called <code>image_uploader.rb</code>. In this file are a number of comments explaining how to customize the uploader. For example there is code to change the upload location, perform processing on the image after uploading and to restrict the type of files that can be uploaded. You should take a look at these options on your own, but for demonstration purposes we&rsquo;re going to get rid of most of it in favor of this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">ImageUploader</span> <span class="o">&lt;</span> <span class="ss">CarrierWave</span><span class="p">:</span><span class="ss">:Uploader</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>  <span class="kp">include</span> <span class="ss">CarrierWave</span><span class="p">:</span><span class="ss">:MiniMagick</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">store_dir</span>
+</span><span class='line'>    <span class="s2">&quot;uploads/</span><span class="si">#{</span><span class="n">model</span><span class="o">.</span><span class="n">class</span><span class="o">.</span><span class="n">to_s</span><span class="o">.</span><span class="n">underscore</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">mounted_as</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">model</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">version</span> <span class="ss">:thumb</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">process</span> <span class="ss">:resize_to_fit</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="o">]</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">version</span> <span class="ss">:preview</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">process</span> <span class="ss">:resize_to_fit</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="o">]</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">version</span> <span class="ss">:full</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">process</span> <span class="ss">:resize_to_fit</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="mi">2048</span><span class="p">,</span> <span class="mi">2048</span><span class="o">]</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Next we&rsquo;ll need to add the uploader to the <code>Band</code> model. We&rsquo;ll need a column in the bands table to store it in so we&rsquo;ll generate a migration to do add it.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'> <span class="nv">$ </span>rails g migration add_image_to_bands image:string
+</span><span class='line'> <span class="nv">$ </span>rake db:migrate
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then, we <em>mount</em> the uploader on the <code>Band</code> model.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Band</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">mount_uploader</span> <span class="ss">:image</span><span class="p">,</span> <span class="no">ImageUploader</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Add a <code>file_field</code> to the Band form.</p>
+
+<p>app/views/bands/_form.html.erb</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;field&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="sx">%= f.label :image %&gt;&lt;br&gt;</span>
+</span><span class='line'><span class="sx">  &lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">file_field</span> <span class="ss">:image</span> <span class="sx">%&gt;</span>
+</span><span class='line'><span class="sx">&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We add <code>:image</code> to the strong params for the controller.</p>
+
+<p>app/controllers/bands_controller.rb</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">band_params</span>
+</span><span class='line'>  <span class="n">params</span><span class="o">.</span><span class="n">require</span><span class="p">(</span><span class="ss">:band</span><span class="p">)</span><span class="o">.</span><span class="n">permit</span><span class="p">(</span><span class="ss">:name</span><span class="p">,</span> <span class="ss">:genre</span><span class="p">,</span> <span class="ss">:image</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Finally, we modify the scaffolded form and show pages to include a form element for the image upload, and modify the <code>form_for</code> to add an <code>:html</code> option.</p>
+
+<p>apps/views/bands/show.html.erb</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;%=</span> <span class="n">image_tag</span> <span class="vi">@band</span><span class="o">.</span><span class="n">image_url</span><span class="o">.</span><span class="n">to_s</span> <span class="sx">%&gt;</span>
+</span><span class='line'><span class="sx">&lt;/p&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now we can upload images &ndash; yay! In your terminal, take a look at <code>public/uploads</code> &ndash; <code>mini_magick</code> and <code>carrierwave</code> made all those files for us! We have access to these different sizes by passing the symbol of the size (as defined in our uploader model) to <code>#image_url</code></p>
+
+<p>app/views/bands/show.html.erb</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;%=</span> <span class="n">image_tag</span> <span class="vi">@band</span><span class="o">.</span><span class="n">image_url</span><span class="p">(</span><span class="ss">:thumb</span><span class="p">)</span><span class="o">.</span><span class="n">to_s</span> <span class="sx">%&gt;</span>
+</span><span class='line'><span class="sx">&lt;/p&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Uploading to S3</h2>
+
+<p>This is cool, but we want to save to S3 instead of the local file system. This is pretty easy. First, we need to tell CarrierWave that we want to use S3. Make a new initializer, <code>config/initializers/carrierwave.rb</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">CarrierWave</span><span class="o">.</span><span class="n">configure</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">fog_credentials</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="ss">provider</span><span class="p">:</span>               <span class="s1">&#39;AWS&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">aws_access_key_id</span><span class="p">:</span>      <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;S3_KEY&#39;</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">aws_secret_access_key</span><span class="p">:</span>  <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;S3_SECRET&#39;</span><span class="o">]</span><span class="p">,</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># For testing, upload files to local `tmp` folder.</span>
+</span><span class='line'>  <span class="k">if</span> <span class="no">Rails</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">test?</span> <span class="o">||</span> <span class="no">Rails</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">cucumber?</span>
+</span><span class='line'>    <span class="n">config</span><span class="o">.</span><span class="n">storage</span>           <span class="o">=</span> <span class="ss">:file</span>
+</span><span class='line'>    <span class="n">config</span><span class="o">.</span><span class="n">enable_processing</span> <span class="o">=</span> <span class="kp">false</span>
+</span><span class='line'>    <span class="n">config</span><span class="o">.</span><span class="n">root</span>              <span class="o">=</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="no">Rails</span><span class="o">.</span><span class="n">root</span><span class="si">}</span><span class="s2">/tmp&quot;</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>    <span class="n">config</span><span class="o">.</span><span class="n">storage</span> <span class="o">=</span> <span class="ss">:fog</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">cache_dir</span>        <span class="o">=</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="no">Rails</span><span class="o">.</span><span class="n">root</span><span class="si">}</span><span class="s2">/tmp/uploads&quot;</span> <span class="c1"># To let CarrierWave work on Heroku</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">fog_directory</span>    <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;S3_BUCKET_NAME&#39;</span><span class="o">]</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We also need to fill out our <code>config/application.yml</code> file. We can get the secret information from the <em>Security Credentials</em> screen in the AWS dashboard &ndash; I won&rsquo;t go into how to fetch this information here, as its likely to change from time to time.</p>
+
+<h2>Resources</h2>
+
+<p><a href="http://railscasts.com/episodes/253-carrierwave-file-uploads?view=asciicast">Railscasts #253 CarrierWave File Uploads</a></p>
+
+<p><a href="http://railscasts.com/episodes/383-uploading-to-amazon-s3?view=asciicast">Railscasts #383 Uploading to Amazon S3</a></p>
+
+<p><a href="http://richonrails.com/articles/allowing-file-uploads-with-carrierwave">Allowing File Uploads with CarrierWave</a></p>
+
+<p><a href="http://www.javahabit.com/2012/06/03/saving-files-in-amazon-s3-using-carrierwave-and-fog-gem/">Saving files in Amazon S3 using CarrierWave and Fog Gem</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Pair Programming Peanut Butter and Jelly Sandwiches]]></title>
