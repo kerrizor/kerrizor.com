@@ -4,7 +4,7 @@
   <title><![CDATA[Kerri Miller]]></title>
   <link href="http://kerrizor.com/atom.xml" rel="self"/>
   <link href="http://kerrizor.com/"/>
-  <updated>2014-04-14T11:25:17-07:00</updated>
+  <updated>2014-04-22T15:29:01-07:00</updated>
   <id>http://kerrizor.com/</id>
   <author>
     <name><![CDATA[Kerri Miller]]></name>
@@ -12,6 +12,179 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Building APIs]]></title>
+    <link href="http://kerrizor.com/blog/2014/04/22/building-apis/"/>
+    <updated>2014-04-22T15:19:20-07:00</updated>
+    <id>http://kerrizor.com/blog/2014/04/22/building-apis</id>
+    <content type="html"><![CDATA[<p><strong>API</strong> stands for <em>Application Programming Interface</em>, and it&rsquo;s one way for applications to communicate and share information with each other.<!-- more --> When one app talks to another, they don&rsquo;t need the same user interface and image and JavaScript bits &ndash; they just need to pass data or commands back and forth, so we use plain text and JSON to accomplish this.</p>
+
+<h2>What is an API?</h2>
+
+<p>In its most common usage, we&rsquo;re referring to the <strong>public API</strong> of an application. Typically a public API allows anonymous users, or individuals who are not privy to the internal operations of an application, access to some, but not all, kinds of data held by the application, and to give the application a certain subset of commands. If we were working with the Twitter API, we might use it to implement the following features:</p>
+
+<ul>
+<li>fetch a user&rsquo;s followers</li>
+<li>favorite a tweet</li>
+<li>block a user from appearing on your timeline</li>
+</ul>
+
+
+<p>These are all examples of working with a public API. A software company opens its API to the public so that other software developers can build applications that are powered by its service.</p>
+
+<h3>Internal APIs</h3>
+
+<p>Imagine each class in your application as a separate application, a collection of individual little programs sending messages back and forth, asking each other to execute certain commands. This is the perspective most senior developers and those concerned with <strong>application architecture</strong> take towards the code. At this scale, we refer to the public methods of a class as that class&rsquo;s API. This view can help us identify the seams between different classes, where one class&rsquo;s responsibilities end and another&rsquo;s begin.</p>
+
+<h3>Ask &ldquo;What does the user want to do?&rdquo;</h3>
+
+<p>One of the more common failure of APIs is to simply expose the inner workings of models or controllers. Often this leads forcing users to understand the inner complexities, tangled dependencies, and specialized terminology of your particular application.</p>
+
+<p>We can avoid this problem by asking from the very first, &ldquo;What does the user want to do?&rdquo; By putting ourselves into their shoes, working to question the assumptions and vocabulary of our audience, we can craft friendly, usable APIs that can lead to more interesting implementations than APIs that are artificially limiting their use cases through poor design.</p>
+
+<h2>Building Your API</h2>
+
+<p>Although its not 100% obvious, your Rails application is already an API. One application &mdash; your web browser &mdash; makes a request for some information. Rails generates a response that consists of HTML, and sends that data back to the browser. Its the <em>browser</em> that handles all the rendering and layout business.</p>
+
+<p>Typically, our Rails APIs will strive to be RESTful, and return data formated as JSON. There are other valid formats, of course &ndash; XML is common in some use cases &ndash; but we&rsquo;ll be focusing on JSON for this.</p>
+
+<p>When want a Rails app to return JSON instead of HTML, its fairly easy to tell the controller to do so. The same controller action can return different formats depending on whether your user is making a request from a browser or an API call from JavaScript. By default, Rails assumes you want HTML, but the app can determine which type of request is being made based on the extension.</p>
+
+<p>Let&rsquo;s take a look at this with <a href="https://github.com/Ada-Developers-Academy/band_practice">band_practice</a> demo app. From the command line, we&rsquo;ll use <em>curl</em> to fetch the <code>#show</code> action for the Singles controller:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># returns HTML by default
+</span><span class='line'>$ curl http://localhost:3000/singles/1</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here&rsquo;s the result in our log:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Started GET "/singles/1" for 127.0.0.1 at 2014-04-04 10:53:57 -0700
+</span><span class='line'>Processing by SinglesController#show as HTML</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now let&rsquo;s make the same request, but append <code>.json</code> to the the URL.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># same controller and action, asking for JSON
+</span><span class='line'>$ curl http://localhost:3000/singles/1.json</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here&rsquo;s the result in our log for the JSON request:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Started GET "/singles/1.json" for 127.0.0.1 at 2014-04-04 10:57:03 -0700
+</span><span class='line'>Processing by SinglesController#show as JSON</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Rendering HTML, JSON, and XML</h2>
+
+<p>Adding the ability to render different response formats is a simple thing to add to our controller. We accomplish this by using the <code>responds_to</code> method.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">SinglesController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">show</span>
+</span><span class='line'>    <span class="n">response</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">title</span><span class="p">:</span>  <span class="vi">@single</span><span class="o">.</span><span class="n">title</span><span class="p">,</span>
+</span><span class='line'>                 <span class="ss">artist</span><span class="p">:</span> <span class="vi">@single</span><span class="o">.</span><span class="n">artist</span><span class="p">,</span>
+</span><span class='line'>                 <span class="n">release_date</span><span class="p">:</span> <span class="vi">@single</span><span class="o">.</span><span class="n">release_date</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">respond_to</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
+</span><span class='line'>      <span class="nb">format</span><span class="o">.</span><span class="n">html</span>
+</span><span class='line'>      <span class="nb">format</span><span class="o">.</span><span class="n">json</span> <span class="p">{</span> <span class="n">render</span> <span class="ss">json</span><span class="p">:</span> <span class="n">response</span> <span class="p">}</span>
+</span><span class='line'>      <span class="nb">format</span><span class="o">.</span><span class="n">xml</span>  <span class="p">{</span> <span class="n">render</span> <span class="ss">xml</span><span class="p">:</span> <span class="n">response</span> <span class="p">}</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>respond_to</code> passes a format object to the block, to which we assign various rendering options. Notice that we don&rsquo;t have to do anything for HTML, as Rails automatically knows to render the default template, however we <em>could</em> specify different behavior if we had a reason to.</p>
+
+<p>We&rsquo;re using the <code>render</code> function to define what our response will look like. It is aware of a wide range of formats. When you pass it the key :json, it will call #to_json on the value, in this case our hash of specific attributes from the <code>@single</code> object. We could have simply passed it the <code>@single</code> object itself, like so:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">respond_to</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
+</span><span class='line'>  <span class="nb">format</span><span class="o">.</span><span class="n">html</span>
+</span><span class='line'>  <span class="nb">format</span><span class="o">.</span><span class="n">json</span> <span class="p">{</span> <span class="n">render</span> <span class="ss">json</span><span class="p">:</span> <span class="vi">@single</span> <span class="p">}</span>
+</span><span class='line'>  <span class="nb">format</span><span class="o">.</span><span class="n">xml</span>  <span class="p">{</span> <span class="n">render</span> <span class="ss">xml</span><span class="p">:</span> <span class="vi">@single</span> <span class="p">}</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Doing so would have transformed the object into a JSON hash, with attribute names as the keys and the value of the attributes as the values in the JSON.</p>
+
+<h2>Response Codes</h2>
+
+<p>We&rsquo;ve built a simple API that responds with some data. We could let the consumer of our API parse that data to figure out if their request was successful or if there was an error of some sort, but that seems like cumbersome for them. Instead, we can use HTTP status codes to provide a quick and easy way for our API&rsquo;s users to see the status of their request.</p>
+
+<p>To set status code in your controller, just pass <code>:status</code> to our render method.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">respond_to</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
+</span><span class='line'>  <span class="nb">format</span><span class="o">.</span><span class="n">html</span>
+</span><span class='line'>  <span class="nb">format</span><span class="o">.</span><span class="n">json</span> <span class="p">{</span> <span class="n">render</span> <span class="ss">json</span><span class="p">:</span> <span class="vi">@single</span><span class="p">,</span> <span class="ss">status</span><span class="p">:</span> <span class="ss">:success</span> <span class="p">}</span>
+</span><span class='line'>  <span class="nb">format</span><span class="o">.</span><span class="n">xml</span>  <span class="p">{</span> <span class="n">render</span> <span class="ss">xml</span><span class="p">:</span> <span class="vi">@single</span><span class="p">,</span>  <span class="ss">status</span><span class="p">:</span> <span class="mi">200</span> <span class="p">}</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Notice in the example above, I used both <code>:success</code> as well as the official numeric value of 200 to inform the consumer that the request was a success. I tend to use the built-in Rails symbols for this, as they&rsquo;re more explicit, however its good to know at least the most common HTTP status codes.</p>
+
+<ul>
+<li>200 &ndash; :ok</li>
+<li>204 &ndash; :no_content</li>
+<li>301 &ndash; :moved_permanently</li>
+<li>400 &ndash; :bad_request</li>
+<li>403 &ndash; :forbidden</li>
+<li>401 &ndash; :unauthorized</li>
+<li>404 &ndash; :not_found</li>
+<li>410 &ndash; :gone</li>
+<li>422 &ndash; :unprocessable_entity</li>
+<li>500 &ndash; :internal_server_error</li>
+</ul>
+
+
+<h3>Magic!</h3>
+
+<p>Just like that, we&rsquo;ve built a very simple API. Naturally, it can get quite a bit more complicated, but this is basically all there is to it. See the resources listed below for further details.</p>
+
+<h2>Resources</h2>
+
+<p><a href="http://www.theodinproject.com/ruby-on-rails/apis-and-building-your-own">API Basics and Building Your Own</a></p>
+
+<p><a href="http://www.amberbit.com/blog/2014/2/19/building-and-documenting-api-in-rails/">Building and documenting API in Rails</a></p>
+
+<p><a href="http://mt.gomiso.com/2011/06/27/building-a-platform-api-on-rails/">Building a Platform API on Rails</a></p>
+
+<p><a href="http://futureshock-ed.com/2011/03/04/http-status-code-symbols-for-rails/">HTTP status code symbols for Rails</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[CarrierWave and S3]]></title>
