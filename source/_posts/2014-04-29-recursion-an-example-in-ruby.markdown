@@ -6,7 +6,6 @@ comments: true
 categories: [Tutorials, Rails, Computer Science]
 ---
 
-## So what is Recursion?
 Recursion is most commonly defined as "a process wherein a method can call themselves until they reach a goal."
 <!-- more -->
 We say that a method is "recursive" if it

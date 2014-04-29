@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Rails | Kerri Miller]]></title>
   <link href="http://kerrizor.com/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://kerrizor.com/"/>
-  <updated>2014-04-29T10:27:43-07:00</updated>
+  <updated>2014-04-29T10:37:21-07:00</updated>
   <id>http://kerrizor.com/</id>
   <author>
     <name><![CDATA[Kerri Miller]]></name>
@@ -18,9 +18,7 @@
     <link href="http://kerrizor.com/blog/2014/04/29/recursion-an-example-in-ruby/"/>
     <updated>2014-04-29T10:20:20-07:00</updated>
     <id>http://kerrizor.com/blog/2014/04/29/recursion-an-example-in-ruby</id>
-    <content type="html"><![CDATA[<h2>So what is Recursion?</h2>
-
-<p>Recursion is most commonly defined as &ldquo;a process wherein a method can call themselves until they reach a goal.&rdquo;</p>
+    <content type="html"><![CDATA[<p>Recursion is most commonly defined as &ldquo;a process wherein a method can call themselves until they reach a goal.&rdquo;</p>
 
 <!-- more -->
 
