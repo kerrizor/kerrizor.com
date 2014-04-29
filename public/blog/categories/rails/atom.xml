@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Rails | Kerri Miller]]></title>
   <link href="http://kerrizor.com/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://kerrizor.com/"/>
-  <updated>2014-04-22T15:29:01-07:00</updated>
+  <updated>2014-04-29T10:27:43-07:00</updated>
   <id>http://kerrizor.com/</id>
   <author>
     <name><![CDATA[Kerri Miller]]></name>
@@ -12,6 +12,131 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Recursion: An Example in Ruby]]></title>
+    <link href="http://kerrizor.com/blog/2014/04/29/recursion-an-example-in-ruby/"/>
+    <updated>2014-04-29T10:20:20-07:00</updated>
+    <id>http://kerrizor.com/blog/2014/04/29/recursion-an-example-in-ruby</id>
+    <content type="html"><![CDATA[<h2>So what is Recursion?</h2>
+
+<p>Recursion is most commonly defined as &ldquo;a process wherein a method can call themselves until they reach a goal.&rdquo;</p>
+
+<!-- more -->
+
+
+<p>We say that a method is &ldquo;recursive&rdquo; if it</p>
+
+<ul>
+<li>Has an end goal, or base case</li>
+<li>Uses a process in which the task at hand is reduced towards that end goal</li>
+</ul>
+
+
+<h3>Divide and Conquer</h3>
+
+<p>Recursion is useful as a way to divide a large problem into a smaller one. The most common way to explain recursion is to use it to calculate the factorial of a number. A factorial is the product of all positive integers less than or equal to the number. Therefor, the factorial of 5 is equal to 1<em>2</em>3<em>4</em>5.</p>
+
+<p>For example:</p>
+
+<p>```ruby
+def factorial(num = 0)
+  return &ldquo;Can not calculate factorial of a negative number&rdquo; if num &lt; 0</p>
+
+<p>  if num &lt;= 1</p>
+
+<pre><code>1
+</code></pre>
+
+<p>  else</p>
+
+<pre><code>num * factorial(num - 1)
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<p>This method returns the factorial of a number by first checking to see if the number is negative. If the number is positive, and is greater than 1, we multiply that number times the factorial of the number immediately preceding it. We could represent this (in pseudo code) as:</p>
+
+<p><code>
+factorial(5)
+  5 * factorial(4)
+</code></p>
+
+<p>In this example, you can see that now we&rsquo;re calling <code>factorial(4)</code>, so we add this to the stack, and we get:</p>
+
+<p>```
+factorial(5)
+  5 * factorial(4)</p>
+
+<pre><code>4 * factorial(3)
+</code></pre>
+
+<p>```</p>
+
+<p>It just keeps going:</p>
+
+<p>```
+factorial(5)
+  5 * factorial(4)</p>
+
+<pre><code>4 * factorial(3)
+  3 * factorial(2)
+    2 * factorial(1)
+</code></pre>
+
+<p>```</p>
+
+<p>&hellip;until we get to the condition where we would no longer call <code>factorial</code> &mdash; when we ask for the factorial of 1, which is 1. At that point, we&rsquo;ve hit the end, and we begin to return values for each call to the method.</p>
+
+<p>```
+factorial(5)
+  5 * 24</p>
+
+<pre><code>4 * 6
+  3 * 2
+    2 * 1 
+</code></pre>
+
+<p>```</p>
+
+<h2>Why is this better than a loop?</h2>
+
+<p>Often its not. If you find yourself saying &ldquo;Geez, I wish I&rsquo;d used a loop here&rdquo; then you probably should. Sometimes, though, recursion is the best tool to use, and its the sort of solution that is worth learning, at least conceptually.</p>
+
+<h2>Links</h2>
+
+<ul>
+<li><a href="http://ruby.bastardsbook.com/chapters/recursion/">A King And His Rocks</a></li>
+<li><a href="http://vimeo.com/24716767">Ruby Recursion [VIDEO]</a></li>
+<li><a href="http://inventwithpython.com/blog/2011/08/11/recursion-explained-with-the-flood-fill-algorithm-and-zombies-and-cats/">Flood Fill, Zombies, and Kittens</a></li>
+<li><a href="http://kittykaraoke.tumblr.com/post/70391881556/fibonacci-with-memoization">Fibonacci</a></li>
+<li><a href="http://www.codequizzes.com/topics/5/quizzes/7">CodeQuiz on Recursion</a></li>
+</ul>
+
+
+<h2>Projects</h2>
+
+<p>(from <a href="http://www.theodinproject.com/courses/ruby-programming/lessons/recursion">The Odin Project</a>)</p>
+
+<h3>Fibonnacci</h3>
+
+<p>The Fibonacci Sequence, which sums each number with the one before it, is a great example of a problem that can be solved recursively.</p>
+
+<h4>Your Task</h4>
+
+<ul>
+<li>Write a method #fibs which takes a number and returns that many members of the fibonacci sequence. Use iteration for this solution.</li>
+<li>Now write another method #fibs_rec which solves the same problem recursively. This can be done in just 3 lines (or 1 if you&rsquo;re crazy).</li>
+</ul>
+
+
+<h3>Coin Flips</h3>
+
+<p>How many different ways are there to flip a fair coin 5 times and not have three or more heads in a row? How about 10<sup>10</sup> times and not have 534 or more heads in a row?</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Building APIs]]></title>

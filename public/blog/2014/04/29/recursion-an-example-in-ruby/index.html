@@ -1,0 +1,264 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Recursion: An Example in Ruby - Kerri Miller</title>
+  <meta name="author" content="Kerri Miller">
+
+  
+  <meta name="description" content="Recursion: An Example in Ruby written April 29, 2014 in Computer Science, Rails, Tutorials So what is Recursion? Recursion is most commonly defined &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://kerrizor.com/blog/2014/04/29/recursion-an-example-in-ruby">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Kerri Miller" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+
+</head>
+
+  <body>
+    <a href="/" class="home-icon">
+      <img src="/images/home.png"/>
+    </a>
+
+    <article role="article" class="full-single-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>Recursion: An Example in Ruby</h1>
+        <div class="meta">
+          written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2014-04-29T10:20:20-07:00" pubdate data-updated="true">April 29, 2014</time> in
+          
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/computer-science/'>Computer Science</a>, <a class='category' href='/blog/categories/rails/'>Rails</a>, <a class='category' href='/blog/categories/tutorials/'>Tutorials</a>
+  
+</span>
+
+
+        </div>
+        <h2>So what is Recursion?</h2>
+
+<p>Recursion is most commonly defined as &ldquo;a process wherein a method can call themselves until they reach a goal.&rdquo;</p>
+
+<!-- more -->
+
+
+<p>We say that a method is &ldquo;recursive&rdquo; if it</p>
+
+<ul>
+<li>Has an end goal, or base case</li>
+<li>Uses a process in which the task at hand is reduced towards that end goal</li>
+</ul>
+
+
+<h3>Divide and Conquer</h3>
+
+<p>Recursion is useful as a way to divide a large problem into a smaller one. The most common way to explain recursion is to use it to calculate the factorial of a number. A factorial is the product of all positive integers less than or equal to the number. Therefor, the factorial of 5 is equal to 1<em>2</em>3<em>4</em>5.</p>
+
+<p>For example:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">factorial</span><span class="p">(</span><span class="n">num</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">return</span> <span class="s2">&quot;Can not calculate factorial of a negative number&quot;</span> <span class="k">if</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="mi">0</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">if</span> <span class="n">num</span> <span class="o">&lt;=</span> <span class="mi">1</span>
+</span><span class='line'>    <span class="mi">1</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>    <span class="n">num</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">num</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This method returns the factorial of a number by first checking to see if the number is negative. If the number is positive, and is greater than 1, we multiply that number times the factorial of the number immediately preceding it. We could represent this (in pseudo code) as:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">factorial</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</span><span class='line'>  <span class="mi">5</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In this example, you can see that now we&rsquo;re calling <code>factorial(4)</code>, so we add this to the stack, and we get:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">factorial</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</span><span class='line'>  <span class="mi">5</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</span><span class='line'>    <span class="mi">4</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It just keeps going:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">factorial</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</span><span class='line'>  <span class="mi">5</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</span><span class='line'>    <span class="mi">4</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span><span class='line'>      <span class="mi">3</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</span><span class='line'>        <span class="mi">2</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>&hellip;until we get to the condition where we would no longer call <code>factorial</code> &mdash; when we ask for the factorial of 1, which is 1. At that point, we&rsquo;ve hit the end, and we begin to return values for each call to the method.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">factorial</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</span><span class='line'>  <span class="mi">5</span> <span class="o">*</span> <span class="mi">24</span>
+</span><span class='line'>    <span class="mi">4</span> <span class="o">*</span> <span class="mi">6</span>
+</span><span class='line'>      <span class="mi">3</span> <span class="o">*</span> <span class="mi">2</span>
+</span><span class='line'>        <span class="mi">2</span> <span class="o">*</span> <span class="mi">1</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Why is this better than a loop?</h2>
+
+<p>Often its not. If you find yourself saying &ldquo;Geez, I wish I&rsquo;d used a loop here&rdquo; then you probably should. Sometimes, though, recursion is the best tool to use, and its the sort of solution that is worth learning, at least conceptually.</p>
+
+<h2>Links</h2>
+
+<ul>
+<li><a href="http://ruby.bastardsbook.com/chapters/recursion/">A King And His Rocks</a></li>
+<li><a href="http://vimeo.com/24716767">Ruby Recursion [VIDEO]</a></li>
+<li><a href="http://inventwithpython.com/blog/2011/08/11/recursion-explained-with-the-flood-fill-algorithm-and-zombies-and-cats/">Flood Fill, Zombies, and Kittens</a></li>
+<li><a href="http://kittykaraoke.tumblr.com/post/70391881556/fibonacci-with-memoization">Fibonacci</a></li>
+<li><a href="http://www.codequizzes.com/topics/5/quizzes/7">CodeQuiz on Recursion</a></li>
+</ul>
+
+
+<h2>Projects</h2>
+
+<p>(from <a href="http://www.theodinproject.com/courses/ruby-programming/lessons/recursion">The Odin Project</a>)</p>
+
+<h3>Fibonnacci</h3>
+
+<p>The Fibonacci Sequence, which sums each number with the one before it, is a great example of a problem that can be solved recursively.</p>
+
+<h4>Your Task</h4>
+
+<ul>
+<li>Write a method #fibs which takes a number and returns that many members of the fibonacci sequence. Use iteration for this solution.</li>
+<li>Now write another method #fibs_rec which solves the same problem recursively. This can be done in just 3 lines (or 1 if you&rsquo;re crazy).</li>
+</ul>
+
+
+<h3>Coin Flips</h3>
+
+<p>How many different ways are there to flip a fair coin 5 times and not have three or more heads in a row? How about 10<sup>10</sup> times and not have 534 or more heads in a row?</p>
+
+      </div>
+    </div>
+  </div>
+</article>
+
+<hr class="divider-short"/>
+
+<div class="archive-link">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        
+          <a class="pull-left" href="/blog/2014/04/22/building-apis/" title="Previous Post: Building APIs">&laquo; Previous: Building APIs</a>
+        
+
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+          /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+          var disqus_shortname = 'kerrizor'; // required: replace example with your forum shortname
+
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+              var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+  </div>
+</div>
+
+
+
+    <footer id="footer" class="her-row">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1">
+  <a href="/"><h4>Home</h4></a>
+</div>
+
+<div class="col-md-2">
+  <div class="social-icon-list">
+    <a href="https://twitter.com/kerrizor"><img src="/images/glyphicons_social_31_twitter.png"/></a>
+    <a href="https://github.com/kerrizor"><img src="/images/glyphicons_social_21_github.png"/></a>
+    <a href="mailto:kerrizor@kerrizor.com"><img src="/images/glyphicons_social_39_e-mail.png"/></a>
+  </div>
+</div>
+
+<div class="pull-right">
+  <h4>Powered by <a href="http://octopress.org/">Octopress</a>. Designed by <a href="http://AdrianArtiles.com">Adrian Artiles</a>.</h4>
+</div>
+
+
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>
