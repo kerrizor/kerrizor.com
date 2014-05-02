@@ -1,0 +1,386 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Ruby Magic 201: Blocks - Kerri Miller</title>
+  <meta name="author" content="Kerri Miller">
+
+  
+  <meta name="description" content="Ruby Magic 201: Blocks written May 1, 2014 in Blocks, Ruby,, Tutorials, Blocks are not a unique features of Ruby, but they&rsquo;re one that many &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://kerrizor.com/blog/2014/05/01/ruby-magic-201-blocks">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Kerri Miller" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+
+</head>
+
+  <body>
+    <a href="/" class="home-icon">
+      <img src="/images/home.png"/>
+    </a>
+
+    <article role="article" class="full-single-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>Ruby Magic 201: Blocks</h1>
+        <div class="meta">
+          written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2014-05-01T16:54:59-07:00" pubdate data-updated="true">May 1, 2014</time> in
+          
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/blocks/'>Blocks</a>, <a class='category' href='/blog/categories/ruby/'>Ruby,</a>, <a class='category' href='/blog/categories/tutorials/'>Tutorials,</a>
+  
+</span>
+
+
+        </div>
+        <p>Blocks are not a unique features of Ruby, but they&rsquo;re one that many people talk about (and more people use without realizing it!) What is a block?</p>
+
+<!-- more -->
+
+
+<blockquote><p>A section of code which is grouped together.</p></blockquote>
+
+<p>Zzzzz&hellip;.</p>
+
+<p>A block is a piece of code that is not executed immediately, but is stored in a variable or passed to a method, and is potentially executed at a later moment in time.</p>
+
+<p>Sound complicated? Let&rsquo;s look at some Ruby.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">p353</span> <span class="p">:</span><span class="mo">001</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="o">+</span><span class="mi">5</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="mi">9</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Pretty simple. Now let&rsquo;s try it with variables.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">p353</span> <span class="p">:</span><span class="mo">002</span> <span class="o">&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">4</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="mi">4</span>
+</span><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">p353</span> <span class="p">:</span><span class="mo">003</span> <span class="o">&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">5</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="mi">5</span>
+</span><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">p353</span> <span class="p">:</span><span class="mo">004</span> <span class="o">&gt;</span> <span class="n">a</span><span class="o">+</span><span class="n">b</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="mi">9</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now, what if we wanted to store this behavior, of <code>a + b</code>? Well, we could write a method:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">p353</span> <span class="p">:</span><span class="mo">005</span> <span class="o">&gt;</span> <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+</span><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">p353</span> <span class="p">:</span><span class="mo">006</span><span class="o">?&gt;</span>   <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+</span><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">p353</span> <span class="p">:</span><span class="mo">007</span><span class="o">?&gt;</span>   <span class="k">end</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="kp">nil</span>
+</span><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">p353</span> <span class="p">:</span><span class="mo">00</span><span class="mi">8</span> <span class="o">&gt;</span> <span class="n">add</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="mi">9</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&rsquo;s ok, but there&rsquo;s an easier way.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">p353</span> <span class="p">:</span><span class="mo">00</span><span class="mi">9</span> <span class="o">&gt;</span> <span class="n">add</span> <span class="o">=</span> <span class="nb">lambda</span> <span class="p">{</span><span class="o">|</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">|</span> <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="p">}</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="c1">#&lt;Proc:0x0000010363fa48@(irb):9 (lambda)&gt;</span>
+</span><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">p353</span> <span class="p">:</span><span class="mo">010</span> <span class="o">&gt;</span> <span class="n">add</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="mi">9</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p><strong>Questions to Ponder:</strong> What&rsquo;s the difference? When would one be more useful or appropriate?</p></blockquote>
+
+<p>Not to confuse you, but let me show you another way you might see this formatted. The following two lines of code work identically.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">add</span> <span class="o">=</span> <span class="nb">lambda</span> <span class="p">{</span><span class="o">|</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">|</span> <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="p">}</span>
+</span><span class='line'><span class="n">add</span> <span class="o">=</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The second format is referred to as a <strong>stabby lambda</strong> and you may see it from time to time.</p>
+
+<h2>Why would I need this?</h2>
+
+<p>Would you believe you&rsquo;ve already been using them without knowing it? Take this bit of Ruby:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">].</span><span class="n">select</span> <span class="p">{</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="n">n</span><span class="o">.</span><span class="n">odd?</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In the above example, <code>{ |n| n.odd? }</code> is a block! We&rsquo;re passing it in to <code>.select</code> (a method from the Enumerable module) which loops over each element in the Array and uses the block to determine what to return.</p>
+
+<p>Here&rsquo;s another use of a block:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">].</span><span class="n">select</span> <span class="k">do</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">n</span><span class="o">.</span><span class="n">odd?</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Different format, same output.</p>
+
+<blockquote><p><strong>Questions to Ponder:</strong> Why would you use <code>{}</code> versus <code>do/end</code>? If they&rsquo;re functionally the same, what might using one over another tell someone else about the code?</p></blockquote>
+
+<p>If I were to rewrite <code>.select</code> in Ruby, it might look something like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">KerriEnumerable</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">k_each</span>
+</span><span class='line'>    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class='line'>    <span class="k">while</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="nb">self</span><span class="o">.</span><span class="n">length</span><span class="p">)</span> <span class="k">do</span>
+</span><span class='line'>      <span class="k">yield</span><span class="p">(</span><span class="nb">self</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">k_select</span>
+</span><span class='line'>    <span class="n">output</span> <span class="o">=</span> <span class="o">[]</span>
+</span><span class='line'>    <span class="n">k_each</span> <span class="p">{</span> <span class="o">|</span><span class="n">e</span><span class="o">|</span> <span class="n">output</span> <span class="o">&lt;&lt;</span> <span class="n">e</span> <span class="k">if</span> <span class="k">yield</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="p">}</span>
+</span><span class='line'>    <span class="n">output</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Copying this into IRB:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">p353</span> <span class="p">:</span><span class="mo">01</span><span class="mi">8</span><span class="o">?&gt;</span> <span class="k">class</span> <span class="nc">Array</span>
+</span><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">p353</span> <span class="p">:</span><span class="mo">01</span><span class="mi">9</span><span class="o">?&gt;</span>   <span class="kp">include</span> <span class="no">KerriEnumerable</span>
+</span><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">p353</span> <span class="p">:</span><span class="mo">020</span><span class="o">?&gt;</span>   <span class="k">end</span>
+</span><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">p353</span> <span class="p">:</span><span class="mo">021</span> <span class="o">&gt;</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">].</span><span class="n">k_select</span><span class="p">{</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="n">n</span><span class="o">.</span><span class="n">odd?</span> <span class="p">}</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="o">]</span>
+</span><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">p353</span> <span class="p">:</span><span class="mo">022</span> <span class="o">&gt;</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">].</span><span class="n">k_select</span><span class="p">{</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="n">n</span><span class="o">.</span><span class="n">even?</span> <span class="p">}</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="o">[</span><span class="mi">2</span><span class="o">]</span>
+</span><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">p353</span> <span class="p">:</span><span class="mo">023</span> <span class="o">&gt;</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">].</span><span class="n">k_select</span><span class="p">{</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="nb">puts</span> <span class="n">n</span> <span class="p">}</span>
+</span><span class='line'><span class="mi">1</span>
+</span><span class='line'><span class="mi">2</span>
+</span><span class='line'><span class="mi">3</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="o">[]</span>
+</span><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">p353</span> <span class="p">:</span><span class="mo">024</span> <span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Working with blocks</h2>
+
+<p>When using blocks, we usually only send one block at a time to a method. There are two ways to work with blocks &ndash; <code>yield</code> and <em>explicit blocks</em>.</p>
+
+<h3>Yield</h3>
+
+<p>You&rsquo;ve probably seen <code>yield</code> in Rails templates; it features prominently smack dab in the middle of most people&rsquo;s <code>app/views/layouts/application.erb.html</code>. <code>yield</code> is a <strong>keyword</strong> command (like <code>def</code> or <code>class</code>) and it tells Ruby to attempt to execute whatever block was passed to the current method.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">calculator</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">yield</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">p353</span> <span class="p">:</span><span class="mo">00</span><span class="mi">8</span> <span class="o">&gt;</span> <span class="n">calculator</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">){</span> <span class="o">|</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">|</span> <span class="n">a</span><span class="o">+</span><span class="n">b</span> <span class="p">}</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="mi">9</span>
+</span><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">p353</span> <span class="p">:</span><span class="mo">00</span><span class="mi">9</span> <span class="o">&gt;</span> <span class="n">calculator</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">){</span> <span class="o">|</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">|</span> <span class="n">a</span><span class="o">*</span><span class="n">b</span> <span class="p">}</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="mi">20</span>
+</span><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">p353</span> <span class="p">:</span><span class="mo">010</span> <span class="o">&gt;</span> <span class="n">calculator</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">){</span> <span class="o">|</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">|</span> <span class="n">a</span><span class="o">-</span><span class="n">b</span> <span class="p">}</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="o">-</span><span class="mi">1</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>What happens if we don&rsquo;t pass a block in to <code>calculator</code>?</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">p353</span> <span class="p">:</span><span class="mo">011</span> <span class="o">&gt;</span> <span class="n">calculator</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+</span><span class='line'><span class="ss">LocalJumpError</span><span class="p">:</span> <span class="n">no</span> <span class="n">block</span> <span class="n">given</span> <span class="p">(</span><span class="k">yield</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">from</span> <span class="p">(</span><span class="n">irb</span><span class="p">):</span><span class="mi">6</span><span class="ss">:in</span> <span class="sb">`calculator&#39;</span>
+</span><span class='line'><span class="sb">    from (irb):11</span>
+</span><span class='line'><span class="sb">    from /Users/kerri/.rvm/rubies/ruby-2.0.0-p353/bin/irb:12:in `</span><span class="o">&lt;</span><span class="n">main</span><span class="o">&gt;</span><span class="err">&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>yield</code> is a little bit magical, as its actually breaking some of the object oriented rules underlying Ruby, but it has the advantage of being fast.</p>
+
+<h3>Explicit Blocks</h3>
+
+<p>Explicit Blocks, on the other hand, are slower. However, when using <code>yield</code> we&rsquo;re not being clear about what we&rsquo;re trying to do. With an explicit block, we&rsquo;re declaring an incoming method parameter to be a block, then executing on it.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">calculator</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">calculation</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">calculation</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Since <code>calculation</code> is an object (a Proc), rather than a magical keyword, we can interact with it and call methods on it. Often this is more practical.</p>
+
+<h2>Resources</h2>
+
+<p><a href="https://rubymonk.com/learning/books/4-ruby-primer-ascent/chapters/18-blocks/lessons/51-new-lesson"><strong>RubyMonk &ndash; Blocks</strong></a></p>
+
+<p>Interactive tutorial on blocks.</p>
+
+<p><a href="http://verboselogging.com/2011/09/20/proc-block-and-two-smoking-lambdas"><strong>Proc, Block, and Two Smoking Lambdas</strong></a></p>
+
+<p>A technical blog post from Daniel Huckstep about the difference between Procs, Blocks, and Lambdas.</p>
+
+<p><a href="https://practicingruby.com/articles/building-enumerable-and-enumerator"><strong>Building Enumerable &amp; Enumerator in Ruby</strong></a></p>
+
+<p>A great exercise if you have a couple hours and really want to learn this stuff!</p>
+
+      </div>
+    </div>
+  </div>
+</article>
+
+<hr class="divider-short"/>
+
+<div class="archive-link">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        
+          <a class="pull-left" href="/blog/2014/04/29/recursion-an-example-in-ruby/" title="Previous Post: Recursion: An Example in Ruby">&laquo; Previous: Recursion: An Example in Ruby</a>
+        
+
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+          /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+          var disqus_shortname = 'kerrizor'; // required: replace example with your forum shortname
+
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+              var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+  </div>
+</div>
+
+
+
+    <footer id="footer" class="her-row">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1">
+  <a href="/"><h4>Home</h4></a>
+</div>
+
+<div class="col-md-2">
+  <div class="social-icon-list">
+    <a href="https://twitter.com/kerrizor"><img src="/images/glyphicons_social_31_twitter.png"/></a>
+    <a href="https://github.com/kerrizor"><img src="/images/glyphicons_social_21_github.png"/></a>
+    <a href="mailto:kerrizor@kerrizor.com"><img src="/images/glyphicons_social_39_e-mail.png"/></a>
+  </div>
+</div>
+
+<div class="pull-right">
+  <h4>Powered by <a href="http://octopress.org/">Octopress</a>. Designed by <a href="http://AdrianArtiles.com">Adrian Artiles</a>.</h4>
+</div>
+
+
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>
