@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Leadership | Kerri Miller]]></title>
+  <link href="http://kerrizor.com/blog/categories/leadership/atom.xml" rel="self"/>
+  <link href="http://kerrizor.com/"/>
+  <updated>2014-08-11T16:07:15-07:00</updated>
+  <id>http://kerrizor.com/</id>
+  <author>
+    <name><![CDATA[Kerri Miller]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Why Your Coworker Is A Jerk?]]></title>
+    <link href="http://kerrizor.com/blog/2014/08/11/why-your-coworker-is-a-jerk/"/>
+    <updated>2014-08-11T15:45:38-07:00</updated>
+    <id>http://kerrizor.com/blog/2014/08/11/why-your-coworker-is-a-jerk</id>
+    <content type="html"><![CDATA[<p>4 or 5 years ago I was working for a startup that was at a critical inflection point in its growth. <!-- more -->Having expanded quickly from 4 to 12, a pause, then another expansion to 25, it had hit the point where no individual could know the minutiae of other groups. As a developer, you no longer could tell someone everything the designer was working on, and the salespeople couldn&rsquo;t tell you what exactly was in the warehouse or where it was on the shelves. We had begun to specialize, in our individual roles as well as in who we hired. We could afford to finally hire the mechanical engineer with a background in lens design, or a firmware developer with a familiarity with GPS antennae. This was a critical time for a company, because something important was happening.</p>
+
+<p>Diversity.</p>
+
+<p>In software, diversity is discussed as a desirable quality to have in your engineering staff, as there are numerous tangible benefits to doing so. When we discuss diversity, in the software industry we are most often discussing it in terms of race and gender, although having a diversity of age and experience can also be drivers of these benefits, although perhaps not as strongly so. Efforts to bring together divergent paths of thinking, different sources for inspiration and creativity, or angles of concern should be celebrated.</p>
+
+<p>By growing so quickly, we were adding an immense amount of diversity in terms of life experience, professional discipline, educational background, and social expectations. Its one of the critical points in growing a company, and so it should be no surprise that we were having a TERRIBLE time trying to successfully integrate new hires to our existing process while recognizing that they had truly valuable opinions about how we were doing business. What works for 6 crazy people in a garage doesn&rsquo;t work for 25 people in a multi-million dollar company, with differing incentives and goals.</p>
+
+<p>One of the flash points was trying to move our hardware and software process to a more Agile model, running into massive amounts of push-back from some recent hires who really didn&rsquo;t get it (and in fact, were actively working against it.) We knew that being &ldquo;lean&rdquo; and &ldquo;scrappy&rdquo; were critical to our culture, and how we had survived the economic crash and the competition from our competitors, but how could we get the new people joining us to see that?</p>
+
+<p>We started a culture committee. We did frequent all-hands meetings. We had endless conversations about how to define what our culture is, how to communicate it, how to document it, and maybe most importantly, how to make our vague &ldquo;mission statement&rdquo; concrete in the day to day of everyone in the company.</p>
+
+<h2>Mission Critical Statement</h2>
+
+<p>Everyone knows you have to have a Mission Statement or a set of values (bonus points if your values create a witty acronym.) Typically they&rsquo;re like this:</p>
+
+<blockquote><p>&ldquo;Zombo.com is a company devoted to developing the human potential of everyone. Our mission is to enable people to create innovative solutions to improve their lives. We understand that the experience of our customers is our chief product. Happiness is a core component of the Zombo.com experience, for customers and employees. Our motto is: Together, we believe that the best in each of us enriches all of us.&rdquo;</p></blockquote>
+
+<p>How about those companies with an Values Acronym? They&rsquo;re the worst.</p>
+
+<blockquote><p><strong>T</strong>ogether we believe that the best in each of us enriches us all.</p>
+
+<p><strong>H</strong>appiness is a core component to the Zombo.com experience.</p>
+
+<p><strong>U</strong>nderstanding the experience of our customers will drive our success.</p>
+
+<p><strong>D</strong>eveloping human potential is what we&rsquo;re devoted to.</p></blockquote>
+
+<p>Every line in each of these is so vague that it can be interpreted in a myriad of ways, depending upon the life experiences, motivations, and incentives of the reader. As an employee, how will I measure my contributions? What criteria will I and my manager use to determine that I&rsquo;m &ldquo;successful&rdquo;? Its a mess.</p>
+
+<p>What would happen if instead of vague platitudes, we made our mission statement a set of concrete examples? I&rsquo;m a fan of the &ldquo;Belief/Therefor&rdquo; model of documenting culture.</p>
+
+<blockquote><p>We believe in [value], therefor we will [action]"</p></blockquote>
+
+<p>For each value the team holds, there should be a corresponding action that demonstrates it. Quantify you existing AND your desired culture by generating a list of Values, and identifying 3-4 Actions or Behaviors that express those values in action.</p>
+
+<p>For one team I managed, our list was:</p>
+
+<ul>
+<li>Focus</li>
+<li>Honesty</li>
+<li>Professionalism</li>
+<li>Respect</li>
+</ul>
+
+
+<p>We each sat with those 4 values posted on a wall in the office, and a week later met again to generate our Belief/Therefor statements. Here' a sample of what we came up with.</p>
+
+<ul>
+<li>&ldquo;We believe in Focus, therefor we will apply all our efforts and skills on doing the work that we have committed to doing.&rdquo;</li>
+<li>&ldquo;We believe in Honesty, therefor when a colleague takes a three-hour lunch break instead of finishing their tasks, we will have a difficult conversation with her.&rdquo;</li>
+<li>&ldquo;We believe in Professionalism, therefor we will tell the product owner "no&rdquo; when we can&rsquo;t do any more work in the Sprint."</li>
+<li>&ldquo;We believe in Respect, therefore we will show up on time for all meetings.&rdquo;</li>
+</ul>
+
+
+<p>To return to the Zombo.com example, here&rsquo;s the content of the Mission Statement and the Values Acronym with this method applied to it.</p>
+
+<h4>We believe that the best in each of us enriches us all, therefor we</h4>
+
+<ul>
+<li>define our individual metrics for success for each employee</li>
+<li>we build team goals in a collaborative and open fashion</li>
+</ul>
+
+
+<h4>We believe in Happiness, therefor we</h4>
+
+<ul>
+<li>have a flexible PTO policy</li>
+<li>encourage everyone to limit their work week to 40 hours</li>
+<li>commit to a strong project management culture to limit impossible deadlines</li>
+</ul>
+
+
+<h4>We believe in Understanding the experience of our customers, therefor we</h4>
+
+<ul>
+<li>devote time to meeting with clients onsite</li>
+<li>bring the customer into our process of iterative cycles</li>
+<li>invest in UI/X testing with real people</li>
+</ul>
+
+
+<h4>We believe in developing the potential of our employees, therefor we</h4>
+
+<ul>
+<li>give resources, time, and support to all employees who seek to improve their own careers through training and education</li>
+<li>are respectful of all our voices in the running of the company</li>
+<li>are active as a company in the communities in which we live</li>
+</ul>
+
+
+<p>Definitely more wordy, but far easier to understand, and clearly aren&rsquo;t just lip service to the latest trends in management. Explicit &ldquo;Belief/Therefor&rdquo; documents help make clear the standards of the company&rsquo;s culture, for current employees, candidates, and customers alike. By making the abstract belief a concrete, tangible practice in work place, the belief becomes reality.</p>
+
+<h2>Changing Hearts And Minds</h2>
+
+<blockquote><p>&ldquo;Every behavior you see has been perfectly influenced by a world that was perfectly designed for this behavior to happen.&rdquo;</p></blockquote>
+
+<p>When people make choices that we can&rsquo;t begin to understand, its important to remember that for the most part, we&rsquo;re simple creatures. We&rsquo;re motivated to act by the rewards and punishments of our environment. I&rsquo;m rewarded for writing code, posting funny pictures on Twitter, and making sure I vacuum up the hair my yellow dog sheds. I&rsquo;m punished for missing deadlines, depressing Twitter posts, or having my clothes covered with dog hair.</p>
+
+<p>Those are obvious motivations, but there are others, more subtle and powerful carrots and sticks that influence our choices. To change behavior, you have to change the world that behavior exists in, and the structure that &ldquo;rewards&rdquo; or &ldquo;punishes&rdquo; an individual&rsquo;s choices.</p>
+
+<p>So what are some of the influences on behavior?</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="left">                       </th>
+<th align="left">                                                   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td align="left"> Personal Motivation   </td>
+<td align="left"> Why should someone care to behave a specific way? </td>
+</tr>
+<tr>
+<td></td>
+<td align="left"> Personal Ability      </td>
+<td align="left"> Can they literally do it?                         </td>
+</tr>
+<tr>
+<td></td>
+<td align="left"> Social Motivation     </td>
+<td align="left"> Is there peer pressure push for this behavior?    </td>
+</tr>
+<tr>
+<td></td>
+<td align="left"> Social Ability        </td>
+<td align="left"> Do people around me support my behavior and help me out with it when I need help? </td>
+</tr>
+<tr>
+<td></td>
+<td align="left"> Structural Motivation </td>
+<td align="left"> Are there rewards/punishments for good/bad behavior? </td>
+</tr>
+<tr>
+<td></td>
+<td align="left"> Structural Ability    </td>
+<td align="left"> Does the physical environment support this behavior? </td>
+</tr>
+</tbody>
+</table>
+
+
+<p><em>(table via <a href="http://www.amazon.com/exec/obidos/ASIN/007148499X">Influencer: The Power to Change Anything</a>)</em></p>
+
+<p>For ourselves as individuals, we have the most control over the first two items. We can identify within ourselves whether or not the Personal Motivation for success is present, and can develop the Personal Ability to honestly evaluate ourselves. When we&rsquo;re trying to understand why someone is resistant to change, considering these forces can help us identify how to best support someone who is struggling with a shift in culture.</p>
+
+<h2>Make It Happen</h2>
+
+<p>We can&rsquo;t just write a mission statement or do a few trust falls and somehow magically have a group of people, with diverse backgrounds and experiences, gel into a team. We can&rsquo;t call someone in from the outside, to <strong>tell</strong> us who we are. We generally agree with the big statements about team culture, things like &ldquo;honesty,&rdquo; &ldquo;respect,&rdquo; and &ldquo;openness.&rdquo; By turning these into concrete, actionable behavior, we can begin to actually created a shared culture, by communicating expectations and beliefs. We can discover biases and fallacies in how we interact with our peers, create lines of dialogue to empower everyone to be fully contributing members of the group, and create a company culture more enduring than beer kegs and ping pong tables &ndash; teams of like-minded individuals working together, with respect and harmony, towards common goals. Its entirely possible, and it all begins with a simple conversation. Get started.</p>
+
+<h2>Bibliography</h2>
+
+<p><a href="http://www.amazon.com/exec/obidos/ASIN/007148499X">Influencer: The Power to Change Anything</a> &ndash; Kerry Patterson, Joseph Grenny, David Maxfield</p>
+
+<p><a href="http://www.amazon.com/Behind-Closed-Doors-Management-Programmers/dp/0976694026">Behind Closed Doors: Secrets of Great Management</a> &ndash; Esther Derby, Johanna Rothman</p>
+
+<p><a href="http://www.amazon.com/Beautiful-Teams-Inspiring-Cautionary-Veteran/dp/0596518021">Beautiful Teams: Inspiring and Cautionary Tales from Veteran Team Leaders</a> &ndash; Andrew Stellman, Jennifer Greene</p>
+]]></content>
+  </entry>
+  
+</feed>
