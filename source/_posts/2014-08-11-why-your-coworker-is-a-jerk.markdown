@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Why Your Coworker Is A Jerk?"
+title: "Why Your Coworker Is A Jerk"
 date: 2014-08-11 15:45:38 -0700
 comments: true
 categories: Culture, Teams, Leadership
