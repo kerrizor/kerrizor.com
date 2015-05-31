@@ -3,7 +3,7 @@ layout: post
 title: "Serendipity and Ruby Objects"
 date: 2015-05-14 10:38:12 -0700
 comments: true
-categories: 
+categories: [Learning, Education, Training]
 ---
 One of the things that I explicitly try to model when I'm teaching people is the idea that There Ain't No Such Thing As An Expert. <!-- more -->There are precious few people who know everything inside and out, and rather than try to puff myself up as some sort of magical repository of wisdom, it's better to model for students how to react to moments of discovering your knowledge isn't perfect, how to turn a surprise into a learning opportunity.
 

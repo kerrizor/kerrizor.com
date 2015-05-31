@@ -3,7 +3,7 @@ layout: post
 title: "My Technical Origin Story"
 date: 2015-01-18 10:21:41 -0800
 comments: true
-categories: 
+categories: [Career]
 ---
 
 I didn't have any idea I would ever do anything with computers until after I left college. <!-- more -->I was a Theater major.. well, Performance Production, to be exact. I specialized in set and lighting design for dance, spending hours on top of a ladder with a wrench. After my junior year of college, I took the proverbial Year Off and started working full-time as a stage hand with the local branch of IATSE (the stagehand's union), eventually landing a role as Technical Director of a regional opera house, supplementing slow periods with working in the office, helping them manage subscriber databases; one of my first paid software gigs was building them a visual "map" of the theater and all its seats in Access, so you could see which seats were available, click on a seat.. er, cell.. and see which patron had that ticket, when we'd last mailed them, were they season ticket holders, etc..
