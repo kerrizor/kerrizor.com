@@ -4,7 +4,7 @@
   <title><![CDATA[Kerri Miller]]></title>
   <link href="http://kerrizor.com/atom.xml" rel="self"/>
   <link href="http://kerrizor.com/"/>
-  <updated>2015-05-30T21:21:26-04:00</updated>
+  <updated>2015-05-30T21:23:49-04:00</updated>
   <id>http://kerrizor.com/</id>
   <author>
     <name><![CDATA[Kerri Miller]]></name>
@@ -22,7 +22,7 @@
 
 <p>I often do Ruby training classes for groups and individuals, both for those who are new to Ruby as well as those who want to dive deeper into specific topics. During one of these training sessions, I loaded this chunk of Ruby into IRB:</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -30,35 +30,37 @@
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>class Parent
-</span><span class='line'>  def speak
-</span><span class='line'>    puts "Pick up your room!"
-</span><span class='line'>  end
-</span><span class='line'>end
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Parent</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">speak</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Pick up your room!&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
 </span><span class='line'>
-</span><span class='line'>class Child &lt; Parent
-</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'><span class="k">class</span> <span class="nc">Child</span> <span class="o">&lt;</span> <span class="no">Parent</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>I&rsquo;m defining a <code>Parent</code> class with one instance method <code>speak</code> and a <code>Child</code> class that inherits from <code>Parent</code>, then I showed the students how method inheritance works in practice.</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>2.2.2 :009 &gt; Parent.new.speak
-</span><span class='line'>Pick up your room!
-</span><span class='line'> =&gt; nil
-</span><span class='line'>2.2.2 :010 &gt; Child.new.speak
-</span><span class='line'>Pick up your room!
-</span><span class='line'> =&gt; nil</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">2</span> <span class="p">:</span><span class="mo">00</span><span class="mi">9</span> <span class="o">&gt;</span> <span class="no">Parent</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">speak</span>
+</span><span class='line'><span class="no">Pick</span> <span class="n">up</span> <span class="n">your</span> <span class="n">room!</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="kp">nil</span>
+</span><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">2</span> <span class="p">:</span><span class="mo">010</span> <span class="o">&gt;</span> <span class="no">Child</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">speak</span>
+</span><span class='line'><span class="no">Pick</span> <span class="n">up</span> <span class="n">your</span> <span class="n">room!</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="kp">nil</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Next, I wanted to show how we could redefine the <code>speak</code> method for <code>Child</code>. As this was a group who, though junior, had previously developed in Java, I also wanted to show off a tiny bit of the Ruby magic, by accomplishing this not by restarting and loading up the objects again, but by reopening the class. Now, normally if I were to do that, I&rsquo;d type it in like this:</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -67,46 +69,49 @@
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>2.2.2 :011 &gt; class Child &lt; Parent
-</span><span class='line'>2.2.2 :012?&gt;   def speak
-</span><span class='line'>2.2.2 :013?&gt;     puts "YOU'RE NOT THE BOSS OF ME!"
-</span><span class='line'>2.2.2 :014?&gt;   end
-</span><span class='line'>2.2.2 :015?&gt; end
-</span><span class='line'> =&gt; :speak
-</span><span class='line'>2.2.2 :016 &gt; Child.new.speak
-</span><span class='line'>YOU'RE NOT THE BOSS OF ME!
-</span><span class='line'> =&gt; nil</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">2</span> <span class="p">:</span><span class="mo">011</span> <span class="o">&gt;</span> <span class="k">class</span> <span class="nc">Child</span> <span class="o">&lt;</span> <span class="no">Parent</span>
+</span><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">2</span> <span class="p">:</span><span class="mo">012</span><span class="o">?&gt;</span>   <span class="k">def</span> <span class="nf">speak</span>
+</span><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">2</span> <span class="p">:</span><span class="mo">013</span><span class="o">?&gt;</span>     <span class="nb">puts</span> <span class="s2">&quot;YOU&#39;RE NOT THE BOSS OF ME!&quot;</span>
+</span><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">2</span> <span class="p">:</span><span class="mo">014</span><span class="o">?&gt;</span>   <span class="k">end</span>
+</span><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">2</span> <span class="p">:</span><span class="mo">015</span><span class="o">?&gt;</span> <span class="k">end</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="ss">:speak</span>
+</span><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">2</span> <span class="p">:</span><span class="mo">016</span> <span class="o">&gt;</span> <span class="no">Child</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">speak</span>
+</span><span class='line'><span class="no">YOU</span><span class="err">&#39;</span><span class="no">RE</span> <span class="no">NOT</span> <span class="no">THE</span> <span class="no">BOSS</span> <span class="no">OF</span> <span class="no">ME</span><span class="o">!</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="kp">nil</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>However, in my excitement to show how cool Ruby is, what I actually did was make a critical typo:</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>2.2.2 :017 &gt; Child &lt; Parent
-</span><span class='line'> =&gt; true</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">2</span> <span class="p">:</span><span class="mo">017</span> <span class="o">&gt;</span> <span class="no">Child</span> <span class="o">&lt;</span> <span class="no">Parent</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="kp">true</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Wait, what?! Child is /less/ than Parent? That&rsquo;s interesting. Why would it be less than Parent? I was in the middle of a class, and didn&rsquo;t want to derail, so I quickly said &ldquo;Oh, that&rsquo;s interesting! I want to explore this later, hang on..&rdquo; As someone who&rsquo;s attention is easily diverted, I&rsquo;ve found having the code equivalent of a little notebook to jot down my thoughts, ideas, and questions to help me focus on the problem at hand rather than rabbit holes, so I keep a little folder of notes (backed by git) of interesting things.</p>
 
 <p>So, questionable code captured, I as able to return to it later that evening. What was going on? Now, I know that all objects in Ruby have their own unique ID. Could that be what we&rsquo;re comparing?</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>2.2.2 :021 &gt; Child.object_id
-</span><span class='line'> =&gt; 70157984875120
-</span><span class='line'>2.2.2 :022 &gt; Parent.object_id
-</span><span class='line'> =&gt; 70157984897760
-</span><span class='line'>2.2.2 :023 &gt; Child.object_id &lt; Parent.object_id
-</span><span class='line'> =&gt; true</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">2</span> <span class="p">:</span><span class="mo">021</span> <span class="o">&gt;</span> <span class="no">Child</span><span class="o">.</span><span class="n">object_id</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="mi">70157984875120</span>
+</span><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">2</span> <span class="p">:</span><span class="mo">022</span> <span class="o">&gt;</span> <span class="no">Parent</span><span class="o">.</span><span class="n">object_id</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="mi">70157984897760</span>
+</span><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">2</span> <span class="p">:</span><span class="mo">023</span> <span class="o">&gt;</span> <span class="no">Child</span><span class="o">.</span><span class="n">object_id</span> <span class="o">&lt;</span> <span class="no">Parent</span><span class="o">.</span><span class="n">object_id</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="kp">true</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Possibly, except that I know that <code>&lt;</code>, just like <code>+</code>, is actually a method.</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -118,38 +123,41 @@
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>2.2.2 :024 &gt; 2.+(3)
-</span><span class='line'> =&gt; 5
-</span><span class='line'>2.2.2 :025 &gt; 2 + 3
-</span><span class='line'> =&gt; 5
-</span><span class='line'>2.2.2 :026 &gt; 2.+(3)
-</span><span class='line'> =&gt; 5
-</span><span class='line'>2.2.2 :027 &gt; 2 &lt; 3
-</span><span class='line'> =&gt; true
-</span><span class='line'>2.2.2 :028 &gt; 2.&lt;(3)
-</span><span class='line'> =&gt; true
-</span><span class='line'>2.2.2 :029 &gt; Child.object_id.&lt;(Parent.object_id)
-</span><span class='line'> =&gt; true</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">2</span> <span class="p">:</span><span class="mo">024</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="o">.</span><span class="n">+</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="mi">5</span>
+</span><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">2</span> <span class="p">:</span><span class="mo">025</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="mi">5</span>
+</span><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">2</span> <span class="p">:</span><span class="mo">026</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="o">.</span><span class="n">+</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="mi">5</span>
+</span><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">2</span> <span class="p">:</span><span class="mo">027</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="o">&lt;</span> <span class="mi">3</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="kp">true</span>
+</span><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">2</span> <span class="p">:</span><span class="mo">02</span><span class="mi">8</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="o">.</span><span class="n">&lt;</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="kp">true</span>
+</span><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">2</span> <span class="p">:</span><span class="mo">02</span><span class="mi">9</span> <span class="o">&gt;</span> <span class="no">Child</span><span class="o">.</span><span class="n">object_id</span><span class="o">.</span><span class="n">&lt;</span><span class="p">(</span><span class="no">Parent</span><span class="o">.</span><span class="n">object_id</span><span class="p">)</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="kp">true</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>It is only a syntactic convenience that we&rsquo;re able to use these operators in a more human friendly manner. So, when I&rsquo;m testing <code>Child.object_id &lt; Parent.object_id</code> my use of <code>&lt;</code> is a method on the object returned by <code>object_id</code>, which in this case if a FixNum.</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>2.2.2 :030 &gt; Child.object_id.class
-</span><span class='line'> =&gt; Fixnum</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">2</span> <span class="p">:</span><span class="mo">030</span> <span class="o">&gt;</span> <span class="no">Child</span><span class="o">.</span><span class="n">object_id</span><span class="o">.</span><span class="n">class</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="no">Fixnum</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>When I&rsquo;m comparing one class to another, I&rsquo;m using not some magical concept of &ldquo;less than&rdquo; that Ruby is aware of, but I&rsquo;m calling a method upon the return value of the previous method. Thankfully, Ruby offers us the ability to inquire where a given method is defined.</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>2.2.2 :031 &gt; Child.new.method(:speak).owner
-</span><span class='line'> =&gt; Parent
-</span><span class='line'>2.2.2 :019 &gt; Child.method(:&lt;).owner
-</span><span class='line'> =&gt; Module</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">2</span> <span class="p">:</span><span class="mo">031</span> <span class="o">&gt;</span> <span class="no">Child</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">method</span><span class="p">(</span><span class="ss">:speak</span><span class="p">)</span><span class="o">.</span><span class="n">owner</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="no">Parent</span>
+</span><span class='line'><span class="mi">2</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">2</span> <span class="p">:</span><span class="mo">01</span><span class="mi">9</span> <span class="o">&gt;</span> <span class="no">Child</span><span class="o">.</span><span class="n">method</span><span class="p">(:</span><span class="o">&lt;</span><span class="p">)</span><span class="o">.</span><span class="n">owner</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="no">Module</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>We see here that <code>speak</code> is defined as a method in <code>Parent</code> and thus handed down via inheritance to a <code>Child</code> instance, and that <code>&lt;</code>, as a class method of <code>Child</code>, is defined in <code>Module</code>.</p>

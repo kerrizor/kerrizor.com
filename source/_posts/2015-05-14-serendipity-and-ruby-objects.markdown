@@ -9,7 +9,7 @@ One of the things that I explicitly try to model when I'm teaching people is the
 
 I often do Ruby training classes for groups and individuals, both for those who are new to Ruby as well as those who want to dive deeper into specific topics. During one of these training sessions, I loaded this chunk of Ruby into IRB:
 
-```
+```ruby
 class Parent
   def speak
     puts "Pick up your room!"
@@ -22,7 +22,7 @@ end
 
 I'm defining a `Parent ` class with one instance method `speak` and a `Child` class that inherits from `Parent`, then I showed the students how method inheritance works in practice.
 
-```
+```ruby
 2.2.2 :009 > Parent.new.speak
 Pick up your room!
  => nil
@@ -33,7 +33,7 @@ Pick up your room!
 
 Next, I wanted to show how we could redefine the `speak` method for `Child`. As this was a group who, though junior, had previously developed in Java, I also wanted to show off a tiny bit of the Ruby magic, by accomplishing this not by restarting and loading up the objects again, but by reopening the class. Now, normally if I were to do that, I'd type it in like this:
 
-```
+```ruby
 2.2.2 :011 > class Child < Parent
 2.2.2 :012?>   def speak
 2.2.2 :013?>     puts "YOU'RE NOT THE BOSS OF ME!"
@@ -47,7 +47,7 @@ YOU'RE NOT THE BOSS OF ME!
 
 However, in my excitement to show how cool Ruby is, what I actually did was make a critical typo:
 
-```
+```ruby
 2.2.2 :017 > Child < Parent
  => true
 ```
@@ -56,7 +56,7 @@ Wait, what?! Child is /less/ than Parent? That's interesting. Why would it be le
 
 So, questionable code captured, I as able to return to it later that evening. What was going on? Now, I know that all objects in Ruby have their own unique ID. Could that be what we're comparing?
 
-```
+```ruby
 2.2.2 :021 > Child.object_id
  => 70157984875120
 2.2.2 :022 > Parent.object_id
@@ -67,7 +67,7 @@ So, questionable code captured, I as able to return to it later that evening. Wh
 
 Possibly, except that I know that `<`, just like `+`, is actually a method.
 
-```
+```ruby
 2.2.2 :024 > 2.+(3)
  => 5
 2.2.2 :025 > 2 + 3
@@ -84,14 +84,14 @@ Possibly, except that I know that `<`, just like `+`, is actually a method.
 
 It is only a syntactic convenience that we're able to use these operators in a more human friendly manner. So, when I'm testing `Child.object_id < Parent.object_id` my use of `<` is a method on the object returned by `object_id`, which in this case if a FixNum.
 
-```
+```ruby
 2.2.2 :030 > Child.object_id.class
  => Fixnum
 ```
 
 When I'm comparing one class to another, I'm using not some magical concept of "less than" that Ruby is aware of, but I'm calling a method upon the return value of the previous method. Thankfully, Ruby offers us the ability to inquire where a given method is defined.
 
-```
+```ruby
 2.2.2 :031 > Child.new.method(:speak).owner
  => Parent
 2.2.2 :019 > Child.method(:<).owner
