@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Education | Kerri Miller]]></title>
-  <link href="http://kerrizor.com/blog/categories/education/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Learning | Kerri Miller]]></title>
+  <link href="http://kerrizor.com/blog/categories/learning/atom.xml" rel="self"/>
   <link href="http://kerrizor.com/"/>
   <updated>2015-05-30T21:29:28-04:00</updated>
   <id>http://kerrizor.com/</id>
@@ -152,136 +152,6 @@ Returns true if mod is a subclass of other. Returns nil if there&rsquo;s no rela
 <h3>Share the knowledge</h3>
 
 <p>Write up a blog post, tweet out a &ldquo;Did you know&hellip;&rdquo; gist, or even just talk about it with your peers on Slack or IRC. Sure, someone might say &ldquo;Oh, I can&rsquo;t believe you didn&rsquo;t know that&rdquo; but people who feign surprise are jerks and you should feel free to ignore this boorish behavior. Besides, no matter how new you are, it&rsquo;s likely that at least one other person DIDN&rsquo;T know about it or could use the reminder. Furthermore, you&rsquo;re the one who&rsquo;s trying to give back to the community by share the knowledge and teaching, so in the end it&rsquo;s you who is the awesome gold star developer, not them. Own it!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Pair Programming Peanut Butter and Jelly Sandwiches]]></title>
-    <link href="http://kerrizor.com/blog/2014/04/12/pair-programming-peanut-butter-and-jelly-sandwiches/"/>
-    <updated>2014-04-12T12:40:33-04:00</updated>
-    <id>http://kerrizor.com/blog/2014/04/12/pair-programming-peanut-butter-and-jelly-sandwiches</id>
-    <content type="html"><![CDATA[<p>For this activity, pairs will work together to make a peanut butter and jelly sandwich. <!-- more --> One person will give instructions on how to make the sandwich while the other is tasked with carrying out those instructions. The one giving instructions can not touch the ingredients or tools, and the one receiving instructions can not speak back.</p>
-
-<p>When one half of the sandwich is complete (or when you deem it time), switch roles. When the sandwich is completely assembled, switch roles again and proceed to cut the sandwich in half.</p>
-
-<h3>For the Instruction Giver</h3>
-
-<p>When listing the steps in your procedure, you should assume the person following your instructions is as &ldquo;dumb&rdquo; as a computer (IE &mdash; someone unfamiliar with making a sandwich, like an alien from another planet.)</p>
-
-<h3>For the Instruction Receiver</h3>
-
-<p>When following the instructions, interpret them as literally as possible. Messes are acceptable (even expected!)</p>
-
-<h2>Assumptions</h2>
-
-<p>While a computer has no &ldquo;common sense&rdquo; that would allow it to correctly guess your intent, we can assume a certain knowledge of these basic actions:</p>
-
-<ul>
-<li>open any container</li>
-<li>close any container</li>
-<li>hold a thing</li>
-<li>pick up a thing</li>
-<li>put a thing down</li>
-<li>spread a condiment</li>
-</ul>
-
-
-<p>What we&rsquo;re missing is timing, amounts, and other interactive qualities. For example, we can say &ldquo;spread the jelly&rdquo; and assume the Receiver knows how to work their muscles, but will continue to &ldquo;spread the jelly&rdquo; all over everything within arms reach unless or until given a condition to cease.</p>
-
-<h2>Goals</h2>
-
-<ul>
-<li>explore pair communication skills</li>
-<li>expose communication assumptions</li>
-<li>practice expressing commands in an explicit manner</li>
-</ul>
-
-
-<h2>Extending The Exercise</h2>
-
-<ul>
-<li>blindfold the Receiver, such that the Instruction Giver has to be more explicit with positional information and conditional checking</li>
-<li>have the Instruction Giver stand with their back to the Receiver, so that they can not see the sandwich being assembled</li>
-<li>have an instructor act as a Product Owner, who can be questioned about any aspect of the sandwich making process, and who can reject the sandwich for any of the following:
-
-<ul>
-<li>wrong kind of
-
-<ul>
-<li>peanut butter</li>
-<li>jelly</li>
-<li>bread</li>
-</ul>
-</li>
-<li>incorrectly cut</li>
-<li>insufficient amount of condiment</li>
-<li>overabundance of condiment</li>
-</ul>
-</li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Practice Makes Perfect]]></title>
-    <link href="http://kerrizor.com/blog/2013/08/02/practice-makes-perfect/"/>
-    <updated>2013-08-02T14:58:00-04:00</updated>
-    <id>http://kerrizor.com/blog/2013/08/02/practice-makes-perfect</id>
-    <content type="html"><![CDATA[<p><em>This post originally appeared on the <a href="http://www.bluebox.net/about/blog/2012/06/practice-make-perfect/">Blue Box blog</a></em></p>
-
-<p>Contrary to popular belief, there is no such thing as “on the job training.” The skills that differentiate senior and lead developers from the herd don’t come from sheer number hours spent simply doing the job. You will pick up a lot of exposure to concepts, techniques, and processes that way, but without focused, deliberate practice, you’re just spinning your wheels.</p>
-
-<!-- more -->
-
-
-<p>When you’re working, the goals are to accomplish the task, avoid failure, and get things done. Space to truly engage in learning is incidental. You are in the closed mode; “don’t distract me, I’m on a mission!” Practice, on the other hand, is about working on a problem with the idea of exploring the problem area, of learning something, and your goal, oddly enough, is to Deliberately Fail.</p>
-
-<p>At Blue Box Group, we have the usual geek clubhouse toys — a MAME cabinet with 1200+ video games, ping-pong, a kegerator (with two varieties of beer!), and a rather nice billiards table, which is our primary obsession these days. Not content with the classic pool hall games of 8-ball, 9-ball, or cut-throat, we play a peculiar game invented by our Principal Technologist we call “Calvin Pool.” The rules are simple – after the break, the person whose turn it is has to attempt to simply hit whichever ball on the table their opponent chooses with the cue ball. There are a few wrinkles, naturally, but more or less the game boils down to “try to make the most difficult shot possible.”</p>
-
-<p>I can’t even begin to tell you how much my game has improved in the last few weeks. I’m making shots that long stymied me, shots that intimidate and impress people who are occasional players of the game. The practice of setting myself up to fail and practicing the difficult, exploring the various possible approaches to seemingly impossible problems, has made me confident when dealing with the easy obstacles.</p>
-
-<p>Similarly, when practicing programming, you need to challenge yourself to learn through exploration and trials, and accept that, as often as not, failure is going to be your ultimate outcome. If you’re not failing, you’re not practicing – you’re just warming up. So, how does someone practice the art and skill of programming? Here are a couple ideas.</p>
-
-<h3>Limit yourself</h3>
-
-<p>Decide for an afternoon, a day, or even a week, you’re going to use a technique you’re unfamiliar with. Make life hard for yourself on purpose.</p>
-
-<ul>
-<li>MONKEY PATCH ALL THE THINGS!</li>
-<li>Make everything a gem</li>
-<li>TDD the living snot out of the next bug you fix</li>
-<li>Use an IDE you don’t normally use for a month</li>
-<li>Don’t use the letter ‘G’</li>
-<li>Make all actions happen through observers</li>
-</ul>
-
-
-<p>By forcing yourself to find new patterns to solve your problems, you’ll quickly run into the current limits of your knowledge and experience, and push out past them.</p>
-
-<h3>Have some fun while doing something dumb!</h3>
-
-<p>Extend your practice by choosing a simple problem and keep solving it in new ways. Each time, add complications and obstructions. Solve a problem over and over, with new obstacles. For instance, let’s take this User Story as a place to start:</p>
-
-<p>“The user will be able to convert a temperature in Celsius to Fahrenheit, and vice versa.”</p>
-
-<p>Simple enough. Five minutes (or less) of Googling will turn up a myriad of solutions, and give you the basic math. Start with making it a small command-line app – easy-peasy lemon-squeezy! Once that’s done (you did tests, too, right?), let’s mutate it and iterate:</p>
-
-<ul>
-<li>Make it a gem</li>
-<li>Release it on Github</li>
-<li>Make it a website</li>
-<li>Make it a mix-in on Numeric</li>
-<li>Make it a web service</li>
-<li>Find other temperature scales you could convert to and from</li>
-<li>Have it attempt to resolve the user’s location via browser location or IP address, and give automated temperature conversions</li>
-<li>Have it query wikipedia (or other data source) to offer information about the resulting temperature – trivia, facts, elements that melt or ignite or freeze at that temp, etc</li>
-<li>Have it record the average, median, and min/max the user has calculated, and say witty things as milestones are passed</li>
-<li>…</li>
-</ul>
-
-
-<p>Practice doesn’t have to be about flash cards and rote memorization. Try a little learning-by-doing, by applying concepts and techniques you want to try to your daily workflow but haven’t found the time for. Get your hands dirty and stretch outside your comfort zone, and approach previously solved and well-understood problems from a fresh perspective, to truly discover the benefits (and drawbacks) of approaches you’re unfamiliar with.</p>
 ]]></content>
   </entry>
   

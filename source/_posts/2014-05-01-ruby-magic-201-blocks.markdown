@@ -3,7 +3,7 @@ layout: post
 title: "Ruby Magic 201: Blocks"
 date: 2014-05-01 16:54:59 -0700
 comments: true
-categories: Tutorials, Ruby, Blocks
+categories: [Tutorials, Ruby, Blocks]
 ---
 Blocks are not a unique features of Ruby, but they're one that many people talk about (and more people use without realizing it!) What is a block?
 <!-- more -->
