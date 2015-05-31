@@ -52,7 +52,7 @@ However, in my excitement to show how cool Ruby is, what I actually did was make
  => true
 ```
 
-Wait, what?! Child is /less/ than Parent? That's interesting. Why would it be less than Parent? I was in the middle of a class, and didn't want to derail, so I quickly said "Oh, that's interesting! I want to explore this later, hang on.." As someone who's attention is easily diverted, I've found having the code equivalent of a little notebook to jot down my thoughts, ideas, and questions to help me focus on the problem at hand rather than rabbit holes, so I keep a little folder of notes (backed by git) of interesting things.
+Wait, what?! Child is /less/ than Parent? That's interesting. Why would it be less than Parent? I was in the middle of a class, and didn't want to derail, so I quickly said "Oh, that's interesting! I want to explore this later, hang on.." As someone whose attention is easily diverted, I've found having the code equivalent of a little notebook to jot down my thoughts, ideas, and questions to help me focus on the problem at hand rather than rabbit holes, so I keep a little folder of notes (backed by git) of interesting things.
 
 So, questionable code captured, I as able to return to it later that evening. What was going on? Now, I know that all objects in Ruby have their own unique ID. Could that be what we're comparing?
 
@@ -122,7 +122,7 @@ More than just learning a bit of Ruby trivia, I hope this story shows a little a
 Don't get distracted from the task you were attempting to accomplish. Time box yourself to 5 or 10 minutes, and if you haven't solved why it's behaving the way it is, but have an alternate solution, simply tuck the bizarre code away somewhere for future research.
 
 ### Create a hypothesis and experiment
-Use the tried and true Scientific Method. Think about the language you're working in normally behaves; what causes similar effects? What might be behavior, given the outcome? The consider how you could test that idea; if the language works the way you think it does, what would happen in the REPL if you changed an input value, or how you worked with the result?
+Use the tried and true Scientific Method. Think about the language you're working in normally behaves; what causes similar effects? What might be the behavior, given the outcome? Then consider how you could test that idea; if the language works the way you think it does, what would happen in the REPL if you changed an input value, or how you worked with the result?
 
 ### Read the docs
 It's rare to have a language, framework, or library without some kind of documentation. Identify what the best resources are for your particular case - online, desktop app like Dash, command-line man pages, or even documentation that ships inside a REPL. Learn how to read the documentation source you choose, how to search, navigate, and expand definitions, and read it when you're surprised by something, *even when you think you won't understand it.*

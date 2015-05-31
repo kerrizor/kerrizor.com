@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Learning | Kerri Miller]]></title>
   <link href="http://kerrizor.com/blog/categories/learning/atom.xml" rel="self"/>
   <link href="http://kerrizor.com/"/>
-  <updated>2015-05-30T21:29:28-04:00</updated>
+  <updated>2015-05-30T21:55:42-04:00</updated>
   <id>http://kerrizor.com/</id>
   <author>
     <name><![CDATA[Kerri Miller]]></name>
@@ -68,7 +68,7 @@ YOU'RE NOT THE BOSS OF ME!
  =&gt; true
 </code></p>
 
-<p>Wait, what?! Child is /less/ than Parent? That&rsquo;s interesting. Why would it be less than Parent? I was in the middle of a class, and didn&rsquo;t want to derail, so I quickly said &ldquo;Oh, that&rsquo;s interesting! I want to explore this later, hang on..&rdquo; As someone who&rsquo;s attention is easily diverted, I&rsquo;ve found having the code equivalent of a little notebook to jot down my thoughts, ideas, and questions to help me focus on the problem at hand rather than rabbit holes, so I keep a little folder of notes (backed by git) of interesting things.</p>
+<p>Wait, what?! Child is /less/ than Parent? That&rsquo;s interesting. Why would it be less than Parent? I was in the middle of a class, and didn&rsquo;t want to derail, so I quickly said &ldquo;Oh, that&rsquo;s interesting! I want to explore this later, hang on..&rdquo; As someone whose attention is easily diverted, I&rsquo;ve found having the code equivalent of a little notebook to jot down my thoughts, ideas, and questions to help me focus on the problem at hand rather than rabbit holes, so I keep a little folder of notes (backed by git) of interesting things.</p>
 
 <p>So, questionable code captured, I as able to return to it later that evening. What was going on? Now, I know that all objects in Ruby have their own unique ID. Could that be what we&rsquo;re comparing?</p>
 
@@ -139,7 +139,7 @@ Returns true if mod is a subclass of other. Returns nil if there&rsquo;s no rela
 
 <h3>Create a hypothesis and experiment</h3>
 
-<p>Use the tried and true Scientific Method. Think about the language you&rsquo;re working in normally behaves; what causes similar effects? What might be behavior, given the outcome? The consider how you could test that idea; if the language works the way you think it does, what would happen in the REPL if you changed an input value, or how you worked with the result?</p>
+<p>Use the tried and true Scientific Method. Think about the language you&rsquo;re working in normally behaves; what causes similar effects? What might be the behavior, given the outcome? Then consider how you could test that idea; if the language works the way you think it does, what would happen in the REPL if you changed an input value, or how you worked with the result?</p>
 
 <h3>Read the docs</h3>
 
