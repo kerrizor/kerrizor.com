@@ -1,0 +1,304 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Serendipity and Ruby Objects - Kerri Miller</title>
+  <meta name="author" content="Kerri Miller">
+
+  
+  <meta name="description" content="Serendipity and Ruby Objects written May 14, 2015 in One of the things that I explicitly try to model when I&rsquo;m teaching people is the idea &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://kerrizor.com/blog/2015/05/14/serendipity-and-ruby-objects">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Kerri Miller" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+
+</head>
+
+  <body>
+    <a href="/" class="home-icon">
+      <img src="/images/home.png"/>
+    </a>
+
+    <article role="article" class="full-single-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>Serendipity and Ruby Objects</h1>
+        <div class="meta">
+          written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2015-05-14T13:38:12-04:00" pubdate data-updated="true">May 14, 2015</time> in
+          
+
+
+        </div>
+        <p>One of the things that I explicitly try to model when I&rsquo;m teaching people is the idea that There Ain&rsquo;t No Such Thing As An Expert. <!-- more -->There are precious few people who know everything inside and out, and rather than try to puff myself up as some sort of magical repository of wisdom, it&rsquo;s better to model for students how to react to moments of discovering your knowledge isn&rsquo;t perfect, how to turn a surprise into a learning opportunity.</p>
+
+<p>I often do Ruby training classes for groups and individuals, both for those who are new to Ruby as well as those who want to dive deeper into specific topics. During one of these training sessions, I loaded this chunk of Ruby into IRB:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class Parent
+</span><span class='line'>  def speak
+</span><span class='line'>    puts "Pick up your room!"
+</span><span class='line'>  end
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'>class Child &lt; Parent
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I&rsquo;m defining a <code>Parent</code> class with one instance method <code>speak</code> and a <code>Child</code> class that inherits from <code>Parent</code>, then I showed the students how method inheritance works in practice.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>2.2.2 :009 &gt; Parent.new.speak
+</span><span class='line'>Pick up your room!
+</span><span class='line'> =&gt; nil
+</span><span class='line'>2.2.2 :010 &gt; Child.new.speak
+</span><span class='line'>Pick up your room!
+</span><span class='line'> =&gt; nil</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Next, I wanted to show how we could redefine the <code>speak</code> method for <code>Child</code>. As this was a group who, though junior, had previously developed in Java, I also wanted to show off a tiny bit of the Ruby magic, by accomplishing this not by restarting and loading up the objects again, but by reopening the class. Now, normally if I were to do that, I&rsquo;d type it in like this:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>2.2.2 :011 &gt; class Child &lt; Parent
+</span><span class='line'>2.2.2 :012?&gt;   def speak
+</span><span class='line'>2.2.2 :013?&gt;     puts "YOU'RE NOT THE BOSS OF ME!"
+</span><span class='line'>2.2.2 :014?&gt;   end
+</span><span class='line'>2.2.2 :015?&gt; end
+</span><span class='line'> =&gt; :speak
+</span><span class='line'>2.2.2 :016 &gt; Child.new.speak
+</span><span class='line'>YOU'RE NOT THE BOSS OF ME!
+</span><span class='line'> =&gt; nil</span></code></pre></td></tr></table></div></figure>
+
+
+<p>However, in my excitement to show how cool Ruby is, what I actually did was make a critical typo:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>2.2.2 :017 &gt; Child &lt; Parent
+</span><span class='line'> =&gt; true</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Wait, what?! Child is /less/ than Parent? That&rsquo;s interesting. Why would it be less than Parent? I was in the middle of a class, and didn&rsquo;t want to derail, so I quickly said &ldquo;Oh, that&rsquo;s interesting! I want to explore this later, hang on..&rdquo; As someone who&rsquo;s attention is easily diverted, I&rsquo;ve found having the code equivalent of a little notebook to jot down my thoughts, ideas, and questions to help me focus on the problem at hand rather than rabbit holes, so I keep a little folder of notes (backed by git) of interesting things.</p>
+
+<p>So, questionable code captured, I as able to return to it later that evening. What was going on? Now, I know that all objects in Ruby have their own unique ID. Could that be what we&rsquo;re comparing?</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>2.2.2 :021 &gt; Child.object_id
+</span><span class='line'> =&gt; 70157984875120
+</span><span class='line'>2.2.2 :022 &gt; Parent.object_id
+</span><span class='line'> =&gt; 70157984897760
+</span><span class='line'>2.2.2 :023 &gt; Child.object_id &lt; Parent.object_id
+</span><span class='line'> =&gt; true</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Possibly, except that I know that <code>&lt;</code>, just like <code>+</code>, is actually a method.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>2.2.2 :024 &gt; 2.+(3)
+</span><span class='line'> =&gt; 5
+</span><span class='line'>2.2.2 :025 &gt; 2 + 3
+</span><span class='line'> =&gt; 5
+</span><span class='line'>2.2.2 :026 &gt; 2.+(3)
+</span><span class='line'> =&gt; 5
+</span><span class='line'>2.2.2 :027 &gt; 2 &lt; 3
+</span><span class='line'> =&gt; true
+</span><span class='line'>2.2.2 :028 &gt; 2.&lt;(3)
+</span><span class='line'> =&gt; true
+</span><span class='line'>2.2.2 :029 &gt; Child.object_id.&lt;(Parent.object_id)
+</span><span class='line'> =&gt; true</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It is only a syntactic convenience that we&rsquo;re able to use these operators in a more human friendly manner. So, when I&rsquo;m testing <code>Child.object_id &lt; Parent.object_id</code> my use of <code>&lt;</code> is a method on the object returned by <code>object_id</code>, which in this case if a FixNum.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>2.2.2 :030 &gt; Child.object_id.class
+</span><span class='line'> =&gt; Fixnum</span></code></pre></td></tr></table></div></figure>
+
+
+<p>When I&rsquo;m comparing one class to another, I&rsquo;m using not some magical concept of &ldquo;less than&rdquo; that Ruby is aware of, but I&rsquo;m calling a method upon the return value of the previous method. Thankfully, Ruby offers us the ability to inquire where a given method is defined.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>2.2.2 :031 &gt; Child.new.method(:speak).owner
+</span><span class='line'> =&gt; Parent
+</span><span class='line'>2.2.2 :019 &gt; Child.method(:&lt;).owner
+</span><span class='line'> =&gt; Module</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We see here that <code>speak</code> is defined as a method in <code>Parent</code> and thus handed down via inheritance to a <code>Child</code> instance, and that <code>&lt;</code>, as a class method of <code>Child</code>, is defined in <code>Module</code>.</p>
+
+<p>So what exactly is it comparing? Off to <a href="http://ruby-doc.org/">http://ruby-doc.org</a> we go! It is a great resource, one that every Ruby developer should have bookmarked. You&rsquo;re not going to remember every single method, or how exactly each method behaves, so being comfortable with this documentation will pay off, and odds are you&rsquo;ll learn something new (or be reminded of something you forgot) every time you browse through it&rsquo;s pages.</p>
+
+<p>Navigating to <a href="http://ruby-doc.org/core-2.2.2/Module.html">the page documenting Module</a> I found the following:</p>
+
+<blockquote><p><strong>mod &lt; other → true, false, or nil</strong>
+Returns true if mod is a subclass of other. Returns nil if there&rsquo;s no relationship between the two. (Think of the relationship in terms of the class definition: “class A&lt;B” implies “A&lt;B”.)</p></blockquote>
+
+<p><em>&mdash; <a href="http://ruby-doc.org/core-2.2.2/Module.html#method-i-3C">Documentation for Module#&lt;</a></em></p>
+
+<p>For our problem, we see that if the Class or Module on the left side of <code>&lt;</code> is a subclass of the Class or Module on the right side, we will get back <code>true</code>. If it is NOT a subclass, we will get back <code>false</code>, and if they&rsquo;re in no way related to each other, we&rsquo;ll get back <code>nil</code>. In the description above, we can see an abstract example to the left of the <em>→</em>, and to the right we see the possible outputs. On the actual Ruby-Docs.org website, you can also mouseover the definition to see a link &ldquo;click to toggle source&rdquo; which will reveal the actual source code that is run when you call the method. If you&rsquo;re curious &mdash; and I encourage you to be so &mdash; take a minute to open it up and see what&rsquo;s going on. You may not be able to write C, but I wager that you can read it and puzzle out how it works.</p>
+
+<p>So this particular bit of Ruby isn&rsquo;t likely to be a big win for me; I can&rsquo;t imagine a terribly large number of situations in which I&rsquo;d need this functionality, but for that handful of cases, it is spectacularly useful.</p>
+
+<h2>&ldquo;We learned a valuable lesson today&rdquo;</h2>
+
+<p>More than just learning a bit of Ruby trivia, I hope this story shows a little about my process for learning.</p>
+
+<h3>Spot the oddity, and move on</h3>
+
+<p>Don&rsquo;t get distracted from the task you were attempting to accomplish. Time box yourself to 5 or 10 minutes, and if you haven&rsquo;t solved why it&rsquo;s behaving the way it is, but have an alternate solution, simply tuck the bizarre code away somewhere for future research.</p>
+
+<h3>Create a hypothesis and experiment</h3>
+
+<p>Use the tried and true Scientific Method. Think about the language you&rsquo;re working in normally behaves; what causes similar effects? What might be behavior, given the outcome? The consider how you could test that idea; if the language works the way you think it does, what would happen in the REPL if you changed an input value, or how you worked with the result?</p>
+
+<h3>Read the docs</h3>
+
+<p>It&rsquo;s rare to have a language, framework, or library without some kind of documentation. Identify what the best resources are for your particular case &ndash; online, desktop app like Dash, command-line man pages, or even documentation that ships inside a REPL. Learn how to read the documentation source you choose, how to search, navigate, and expand definitions, and read it when you&rsquo;re surprised by something, <em>even when you think you won&rsquo;t understand it.</em></p>
+
+<h3>Imagine a reason or use case</h3>
+
+<p>Once you&rsquo;ve learned how it behaves and played with it (either in a REPL or small mock-up script or application) try to imagine the use case for why this feature was built. What problems were other developers having that the language or framework&rsquo;s core team were attempting to address? Seeing the context of why you&rsquo;d use a particular feature helps to understand why it behaves the way it does.</p>
+
+<h3>Share the knowledge</h3>
+
+<p>Write up a blog post, tweet out a &ldquo;Did you know&hellip;&rdquo; gist, or even just talk about it with your peers on Slack or IRC. Sure, someone might say &ldquo;Oh, I can&rsquo;t believe you didn&rsquo;t know that&rdquo; but people who feign surprise are jerks and you should feel free to ignore this boorish behavior. Besides, no matter how new you are, it&rsquo;s likely that at least one other person DIDN&rsquo;T know about it or could use the reminder. Furthermore, you&rsquo;re the one who&rsquo;s trying to give back to the community by share the knowledge and teaching, so in the end it&rsquo;s you who is the awesome gold star developer, not them. Own it!</p>
+
+      </div>
+    </div>
+  </div>
+</article>
+
+<hr class="divider-short"/>
+
+<div class="archive-link">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        
+          <a class="pull-left" href="/blog/2015/01/18/my-technical-origin-story/" title="Previous Post: My Technical Origin Story">&laquo; Previous: My Technical Origin Story</a>
+        
+
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+          /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+          var disqus_shortname = 'kerrizor'; // required: replace example with your forum shortname
+
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+              var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+  </div>
+</div>
+
+
+
+    <footer id="footer" class="her-row">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1">
+  <a href="/"><h4>Home</h4></a>
+</div>
+
+<div class="col-md-2">
+  <div class="social-icon-list">
+    <a href="https://twitter.com/kerrizor"><img src="/images/glyphicons_social_31_twitter.png"/></a>
+    <a href="https://github.com/kerrizor"><img src="/images/glyphicons_social_21_github.png"/></a>
+    <a href="mailto:kerrizor@kerrizor.com"><img src="/images/glyphicons_social_39_e-mail.png"/></a>
+  </div>
+</div>
+
+<div class="pull-right">
+  <h4>Powered by <a href="http://octopress.org/">Octopress</a>. Designed by <a href="http://AdrianArtiles.com">Adrian Artiles</a>.</h4>
+</div>
+
+
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>

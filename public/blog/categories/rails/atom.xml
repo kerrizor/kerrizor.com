@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Rails | Kerri Miller]]></title>
   <link href="http://kerrizor.com/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://kerrizor.com/"/>
-  <updated>2015-01-18T10:23:55-08:00</updated>
+  <updated>2015-05-30T21:21:26-04:00</updated>
   <id>http://kerrizor.com/</id>
   <author>
     <name><![CDATA[Kerri Miller]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Recursion: An Example in Ruby]]></title>
     <link href="http://kerrizor.com/blog/2014/04/29/recursion-an-example-in-ruby/"/>
-    <updated>2014-04-29T10:20:20-07:00</updated>
+    <updated>2014-04-29T13:20:20-04:00</updated>
     <id>http://kerrizor.com/blog/2014/04/29/recursion-an-example-in-ruby</id>
     <content type="html"><![CDATA[<p>Recursion is most commonly defined as &ldquo;a process wherein a method can call themselves until they reach a goal.&rdquo;</p>
 
@@ -139,7 +139,7 @@ factorial(5)
   <entry>
     <title type="html"><![CDATA[Building APIs]]></title>
     <link href="http://kerrizor.com/blog/2014/04/22/building-apis/"/>
-    <updated>2014-04-22T15:19:20-07:00</updated>
+    <updated>2014-04-22T18:19:20-04:00</updated>
     <id>http://kerrizor.com/blog/2014/04/22/building-apis</id>
     <content type="html"><![CDATA[<p><strong>API</strong> stands for <em>Application Programming Interface</em>, and it&rsquo;s one way for applications to communicate and share information with each other.<!-- more --> When one app talks to another, they don&rsquo;t need the same user interface and image and JavaScript bits &ndash; they just need to pass data or commands back and forth, so we use plain text and JSON to accomplish this.</p>
 
@@ -291,7 +291,7 @@ end
   <entry>
     <title type="html"><![CDATA[CarrierWave and S3]]></title>
     <link href="http://kerrizor.com/blog/2014/04/13/carrierwave-and-s3/"/>
-    <updated>2014-04-13T15:13:22-07:00</updated>
+    <updated>2014-04-13T18:13:22-04:00</updated>
     <id>http://kerrizor.com/blog/2014/04/13/carrierwave-and-s3</id>
     <content type="html"><![CDATA[<p>CarrierWave is a gem that adds a fairly simple and flexible way to users to upload files to our Rails application. <!-- more --> It also lets us resize images to make thumbnails and other sizes as we need them, and lets us upload all these uploaded (and generated) files to cloud storage products, such as S3.</p>
 
@@ -480,7 +480,7 @@ end
   <entry>
     <title type="html"><![CDATA[A Quick Intro To MongoDB In Rails]]></title>
     <link href="http://kerrizor.com/blog/2014/04/02/quick-intro-to-mongodb-in-rails/"/>
-    <updated>2014-04-02T17:04:33-07:00</updated>
+    <updated>2014-04-02T20:04:33-04:00</updated>
     <id>http://kerrizor.com/blog/2014/04/02/quick-intro-to-mongodb-in-rails</id>
     <content type="html"><![CDATA[<p>By Internet standards, MongoDB is a venerable NoSQL database. <!-- more -->First introduced in 2009, it was designed as a scalable document storage engine. In Mongo, we don&rsquo;t work with tables and rows, we work with <strong>collections</strong> and <strong>documents</strong>. Documents contain JSON/BSON hashes, so any data that can be represented as a hash can be stored in Mongo. Mongo is a <strong>schemaless</strong> database, meaning there&rsquo;s no requirements nor enforcement about the structure of the data in a document.</p>
 
@@ -684,7 +684,7 @@ return cursor;
   <entry>
     <title type="html"><![CDATA[Rails Internationalization (I18n)]]></title>
     <link href="http://kerrizor.com/blog/2014/03/31/rails-internationalization-i18n/"/>
-    <updated>2014-03-31T12:01:32-07:00</updated>
+    <updated>2014-03-31T15:01:32-04:00</updated>
     <id>http://kerrizor.com/blog/2014/03/31/rails-internationalization-i18n</id>
     <content type="html"><![CDATA[<p>Rails by default installs support for internationalization (or <em>I18n</em>) through the gem <code>i18n</code>. This gem add support for multiple language dictionaries and translation files, to let you easily change the language your site displays.</p>
 

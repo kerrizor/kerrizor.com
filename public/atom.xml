@@ -4,7 +4,7 @@
   <title><![CDATA[Kerri Miller]]></title>
   <link href="http://kerrizor.com/atom.xml" rel="self"/>
   <link href="http://kerrizor.com/"/>
-  <updated>2015-01-18T10:23:55-08:00</updated>
+  <updated>2015-05-30T21:21:26-04:00</updated>
   <id>http://kerrizor.com/</id>
   <author>
     <name><![CDATA[Kerri Miller]]></name>
@@ -14,9 +14,189 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Serendipity and Ruby Objects]]></title>
+    <link href="http://kerrizor.com/blog/2015/05/14/serendipity-and-ruby-objects/"/>
+    <updated>2015-05-14T13:38:12-04:00</updated>
+    <id>http://kerrizor.com/blog/2015/05/14/serendipity-and-ruby-objects</id>
+    <content type="html"><![CDATA[<p>One of the things that I explicitly try to model when I&rsquo;m teaching people is the idea that There Ain&rsquo;t No Such Thing As An Expert. <!-- more -->There are precious few people who know everything inside and out, and rather than try to puff myself up as some sort of magical repository of wisdom, it&rsquo;s better to model for students how to react to moments of discovering your knowledge isn&rsquo;t perfect, how to turn a surprise into a learning opportunity.</p>
+
+<p>I often do Ruby training classes for groups and individuals, both for those who are new to Ruby as well as those who want to dive deeper into specific topics. During one of these training sessions, I loaded this chunk of Ruby into IRB:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class Parent
+</span><span class='line'>  def speak
+</span><span class='line'>    puts "Pick up your room!"
+</span><span class='line'>  end
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'>class Child &lt; Parent
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I&rsquo;m defining a <code>Parent</code> class with one instance method <code>speak</code> and a <code>Child</code> class that inherits from <code>Parent</code>, then I showed the students how method inheritance works in practice.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>2.2.2 :009 &gt; Parent.new.speak
+</span><span class='line'>Pick up your room!
+</span><span class='line'> =&gt; nil
+</span><span class='line'>2.2.2 :010 &gt; Child.new.speak
+</span><span class='line'>Pick up your room!
+</span><span class='line'> =&gt; nil</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Next, I wanted to show how we could redefine the <code>speak</code> method for <code>Child</code>. As this was a group who, though junior, had previously developed in Java, I also wanted to show off a tiny bit of the Ruby magic, by accomplishing this not by restarting and loading up the objects again, but by reopening the class. Now, normally if I were to do that, I&rsquo;d type it in like this:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>2.2.2 :011 &gt; class Child &lt; Parent
+</span><span class='line'>2.2.2 :012?&gt;   def speak
+</span><span class='line'>2.2.2 :013?&gt;     puts "YOU'RE NOT THE BOSS OF ME!"
+</span><span class='line'>2.2.2 :014?&gt;   end
+</span><span class='line'>2.2.2 :015?&gt; end
+</span><span class='line'> =&gt; :speak
+</span><span class='line'>2.2.2 :016 &gt; Child.new.speak
+</span><span class='line'>YOU'RE NOT THE BOSS OF ME!
+</span><span class='line'> =&gt; nil</span></code></pre></td></tr></table></div></figure>
+
+
+<p>However, in my excitement to show how cool Ruby is, what I actually did was make a critical typo:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>2.2.2 :017 &gt; Child &lt; Parent
+</span><span class='line'> =&gt; true</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Wait, what?! Child is /less/ than Parent? That&rsquo;s interesting. Why would it be less than Parent? I was in the middle of a class, and didn&rsquo;t want to derail, so I quickly said &ldquo;Oh, that&rsquo;s interesting! I want to explore this later, hang on..&rdquo; As someone who&rsquo;s attention is easily diverted, I&rsquo;ve found having the code equivalent of a little notebook to jot down my thoughts, ideas, and questions to help me focus on the problem at hand rather than rabbit holes, so I keep a little folder of notes (backed by git) of interesting things.</p>
+
+<p>So, questionable code captured, I as able to return to it later that evening. What was going on? Now, I know that all objects in Ruby have their own unique ID. Could that be what we&rsquo;re comparing?</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>2.2.2 :021 &gt; Child.object_id
+</span><span class='line'> =&gt; 70157984875120
+</span><span class='line'>2.2.2 :022 &gt; Parent.object_id
+</span><span class='line'> =&gt; 70157984897760
+</span><span class='line'>2.2.2 :023 &gt; Child.object_id &lt; Parent.object_id
+</span><span class='line'> =&gt; true</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Possibly, except that I know that <code>&lt;</code>, just like <code>+</code>, is actually a method.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>2.2.2 :024 &gt; 2.+(3)
+</span><span class='line'> =&gt; 5
+</span><span class='line'>2.2.2 :025 &gt; 2 + 3
+</span><span class='line'> =&gt; 5
+</span><span class='line'>2.2.2 :026 &gt; 2.+(3)
+</span><span class='line'> =&gt; 5
+</span><span class='line'>2.2.2 :027 &gt; 2 &lt; 3
+</span><span class='line'> =&gt; true
+</span><span class='line'>2.2.2 :028 &gt; 2.&lt;(3)
+</span><span class='line'> =&gt; true
+</span><span class='line'>2.2.2 :029 &gt; Child.object_id.&lt;(Parent.object_id)
+</span><span class='line'> =&gt; true</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It is only a syntactic convenience that we&rsquo;re able to use these operators in a more human friendly manner. So, when I&rsquo;m testing <code>Child.object_id &lt; Parent.object_id</code> my use of <code>&lt;</code> is a method on the object returned by <code>object_id</code>, which in this case if a FixNum.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>2.2.2 :030 &gt; Child.object_id.class
+</span><span class='line'> =&gt; Fixnum</span></code></pre></td></tr></table></div></figure>
+
+
+<p>When I&rsquo;m comparing one class to another, I&rsquo;m using not some magical concept of &ldquo;less than&rdquo; that Ruby is aware of, but I&rsquo;m calling a method upon the return value of the previous method. Thankfully, Ruby offers us the ability to inquire where a given method is defined.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>2.2.2 :031 &gt; Child.new.method(:speak).owner
+</span><span class='line'> =&gt; Parent
+</span><span class='line'>2.2.2 :019 &gt; Child.method(:&lt;).owner
+</span><span class='line'> =&gt; Module</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We see here that <code>speak</code> is defined as a method in <code>Parent</code> and thus handed down via inheritance to a <code>Child</code> instance, and that <code>&lt;</code>, as a class method of <code>Child</code>, is defined in <code>Module</code>.</p>
+
+<p>So what exactly is it comparing? Off to <a href="http://ruby-doc.org/">http://ruby-doc.org</a> we go! It is a great resource, one that every Ruby developer should have bookmarked. You&rsquo;re not going to remember every single method, or how exactly each method behaves, so being comfortable with this documentation will pay off, and odds are you&rsquo;ll learn something new (or be reminded of something you forgot) every time you browse through it&rsquo;s pages.</p>
+
+<p>Navigating to <a href="http://ruby-doc.org/core-2.2.2/Module.html">the page documenting Module</a> I found the following:</p>
+
+<blockquote><p><strong>mod &lt; other → true, false, or nil</strong>
+Returns true if mod is a subclass of other. Returns nil if there&rsquo;s no relationship between the two. (Think of the relationship in terms of the class definition: “class A&lt;B” implies “A&lt;B”.)</p></blockquote>
+
+<p><em>&mdash; <a href="http://ruby-doc.org/core-2.2.2/Module.html#method-i-3C">Documentation for Module#&lt;</a></em></p>
+
+<p>For our problem, we see that if the Class or Module on the left side of <code>&lt;</code> is a subclass of the Class or Module on the right side, we will get back <code>true</code>. If it is NOT a subclass, we will get back <code>false</code>, and if they&rsquo;re in no way related to each other, we&rsquo;ll get back <code>nil</code>. In the description above, we can see an abstract example to the left of the <em>→</em>, and to the right we see the possible outputs. On the actual Ruby-Docs.org website, you can also mouseover the definition to see a link &ldquo;click to toggle source&rdquo; which will reveal the actual source code that is run when you call the method. If you&rsquo;re curious &mdash; and I encourage you to be so &mdash; take a minute to open it up and see what&rsquo;s going on. You may not be able to write C, but I wager that you can read it and puzzle out how it works.</p>
+
+<p>So this particular bit of Ruby isn&rsquo;t likely to be a big win for me; I can&rsquo;t imagine a terribly large number of situations in which I&rsquo;d need this functionality, but for that handful of cases, it is spectacularly useful.</p>
+
+<h2>&ldquo;We learned a valuable lesson today&rdquo;</h2>
+
+<p>More than just learning a bit of Ruby trivia, I hope this story shows a little about my process for learning.</p>
+
+<h3>Spot the oddity, and move on</h3>
+
+<p>Don&rsquo;t get distracted from the task you were attempting to accomplish. Time box yourself to 5 or 10 minutes, and if you haven&rsquo;t solved why it&rsquo;s behaving the way it is, but have an alternate solution, simply tuck the bizarre code away somewhere for future research.</p>
+
+<h3>Create a hypothesis and experiment</h3>
+
+<p>Use the tried and true Scientific Method. Think about the language you&rsquo;re working in normally behaves; what causes similar effects? What might be behavior, given the outcome? The consider how you could test that idea; if the language works the way you think it does, what would happen in the REPL if you changed an input value, or how you worked with the result?</p>
+
+<h3>Read the docs</h3>
+
+<p>It&rsquo;s rare to have a language, framework, or library without some kind of documentation. Identify what the best resources are for your particular case &ndash; online, desktop app like Dash, command-line man pages, or even documentation that ships inside a REPL. Learn how to read the documentation source you choose, how to search, navigate, and expand definitions, and read it when you&rsquo;re surprised by something, <em>even when you think you won&rsquo;t understand it.</em></p>
+
+<h3>Imagine a reason or use case</h3>
+
+<p>Once you&rsquo;ve learned how it behaves and played with it (either in a REPL or small mock-up script or application) try to imagine the use case for why this feature was built. What problems were other developers having that the language or framework&rsquo;s core team were attempting to address? Seeing the context of why you&rsquo;d use a particular feature helps to understand why it behaves the way it does.</p>
+
+<h3>Share the knowledge</h3>
+
+<p>Write up a blog post, tweet out a &ldquo;Did you know&hellip;&rdquo; gist, or even just talk about it with your peers on Slack or IRC. Sure, someone might say &ldquo;Oh, I can&rsquo;t believe you didn&rsquo;t know that&rdquo; but people who feign surprise are jerks and you should feel free to ignore this boorish behavior. Besides, no matter how new you are, it&rsquo;s likely that at least one other person DIDN&rsquo;T know about it or could use the reminder. Furthermore, you&rsquo;re the one who&rsquo;s trying to give back to the community by share the knowledge and teaching, so in the end it&rsquo;s you who is the awesome gold star developer, not them. Own it!</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[My Technical Origin Story]]></title>
     <link href="http://kerrizor.com/blog/2015/01/18/my-technical-origin-story/"/>
-    <updated>2015-01-18T10:21:41-08:00</updated>
+    <updated>2015-01-18T13:21:41-05:00</updated>
     <id>http://kerrizor.com/blog/2015/01/18/my-technical-origin-story</id>
     <content type="html"><![CDATA[<p>I didn&rsquo;t have any idea I would ever do anything with computers until after I left college. <!-- more -->I was a Theater major.. well, Performance Production, to be exact. I specialized in set and lighting design for dance, spending hours on top of a ladder with a wrench. After my junior year of college, I took the proverbial Year Off and started working full-time as a stage hand with the local branch of IATSE (the stagehand&rsquo;s union), eventually landing a role as Technical Director of a regional opera house, supplementing slow periods with working in the office, helping them manage subscriber databases; one of my first paid software gigs was building them a visual &ldquo;map&rdquo; of the theater and all its seats in Access, so you could see which seats were available, click on a seat.. er, cell.. and see which patron had that ticket, when we&rsquo;d last mailed them, were they season ticket holders, etc..</p>
 
@@ -39,7 +219,7 @@
   <entry>
     <title type="html"><![CDATA[Why Your Coworker Is a Jerk]]></title>
     <link href="http://kerrizor.com/blog/2014/08/11/why-your-coworker-is-a-jerk/"/>
-    <updated>2014-08-11T15:45:38-07:00</updated>
+    <updated>2014-08-11T18:45:38-04:00</updated>
     <id>http://kerrizor.com/blog/2014/08/11/why-your-coworker-is-a-jerk</id>
     <content type="html"><![CDATA[<p>4 or 5 years ago I was working for a startup that was at a critical inflection point in its growth. <!-- more -->Having expanded quickly from 4 to 12, a pause, then another expansion to 25, it had hit the point where no individual could know the minutiae of other groups. As a developer, you no longer could tell someone everything the designer was working on, and the salespeople couldn&rsquo;t tell you what exactly was in the warehouse or where it was on the shelves. We had begun to specialize, in our individual roles as well as in who we hired. We could afford to finally hire the mechanical engineer with a background in lens design, or a firmware developer with a familiarity with GPS antennae. This was a critical time for the company, because something important was happening.</p>
 
@@ -210,7 +390,7 @@
   <entry>
     <title type="html"><![CDATA[Ruby Magic 201: Blocks]]></title>
     <link href="http://kerrizor.com/blog/2014/05/01/ruby-magic-201-blocks/"/>
-    <updated>2014-05-01T16:54:59-07:00</updated>
+    <updated>2014-05-01T19:54:59-04:00</updated>
     <id>http://kerrizor.com/blog/2014/05/01/ruby-magic-201-blocks</id>
     <content type="html"><![CDATA[<p>Blocks are not a unique features of Ruby, but they&rsquo;re one that many people talk about (and more people use without realizing it!) What is a block?</p>
 
@@ -466,7 +646,7 @@
   <entry>
     <title type="html"><![CDATA[Recursion: An Example in Ruby]]></title>
     <link href="http://kerrizor.com/blog/2014/04/29/recursion-an-example-in-ruby/"/>
-    <updated>2014-04-29T10:20:20-07:00</updated>
+    <updated>2014-04-29T13:20:20-04:00</updated>
     <id>http://kerrizor.com/blog/2014/04/29/recursion-an-example-in-ruby</id>
     <content type="html"><![CDATA[<p>Recursion is most commonly defined as &ldquo;a process wherein a method can call themselves until they reach a goal.&rdquo;</p>
 
@@ -598,7 +778,7 @@
   <entry>
     <title type="html"><![CDATA[Building APIs]]></title>
     <link href="http://kerrizor.com/blog/2014/04/22/building-apis/"/>
-    <updated>2014-04-22T15:19:20-07:00</updated>
+    <updated>2014-04-22T18:19:20-04:00</updated>
     <id>http://kerrizor.com/blog/2014/04/22/building-apis</id>
     <content type="html"><![CDATA[<p><strong>API</strong> stands for <em>Application Programming Interface</em>, and it&rsquo;s one way for applications to communicate and share information with each other.<!-- more --> When one app talks to another, they don&rsquo;t need the same user interface and image and JavaScript bits &ndash; they just need to pass data or commands back and forth, so we use plain text and JSON to accomplish this.</p>
 
@@ -771,7 +951,7 @@
   <entry>
     <title type="html"><![CDATA[CarrierWave and S3]]></title>
     <link href="http://kerrizor.com/blog/2014/04/13/carrierwave-and-s3/"/>
-    <updated>2014-04-13T15:13:22-07:00</updated>
+    <updated>2014-04-13T18:13:22-04:00</updated>
     <id>http://kerrizor.com/blog/2014/04/13/carrierwave-and-s3</id>
     <content type="html"><![CDATA[<p>CarrierWave is a gem that adds a fairly simple and flexible way to users to upload files to our Rails application. <!-- more --> It also lets us resize images to make thumbnails and other sizes as we need them, and lets us upload all these uploaded (and generated) files to cloud storage products, such as S3.</p>
 
@@ -1003,7 +1183,7 @@
   <entry>
     <title type="html"><![CDATA[Pair Programming Peanut Butter and Jelly Sandwiches]]></title>
     <link href="http://kerrizor.com/blog/2014/04/12/pair-programming-peanut-butter-and-jelly-sandwiches/"/>
-    <updated>2014-04-12T09:40:33-07:00</updated>
+    <updated>2014-04-12T12:40:33-04:00</updated>
     <id>http://kerrizor.com/blog/2014/04/12/pair-programming-peanut-butter-and-jelly-sandwiches</id>
     <content type="html"><![CDATA[<p>For this activity, pairs will work together to make a peanut butter and jelly sandwich. <!-- more --> One person will give instructions on how to make the sandwich while the other is tasked with carrying out those instructions. The one giving instructions can not touch the ingredients or tools, and the one receiving instructions can not speak back.</p>
 
@@ -1071,7 +1251,7 @@
   <entry>
     <title type="html"><![CDATA[A Quick Intro to MongoDB in Rails]]></title>
     <link href="http://kerrizor.com/blog/2014/04/02/quick-intro-to-mongodb-in-rails/"/>
-    <updated>2014-04-02T17:04:33-07:00</updated>
+    <updated>2014-04-02T20:04:33-04:00</updated>
     <id>http://kerrizor.com/blog/2014/04/02/quick-intro-to-mongodb-in-rails</id>
     <content type="html"><![CDATA[<p>By Internet standards, MongoDB is a venerable NoSQL database. <!-- more -->First introduced in 2009, it was designed as a scalable document storage engine. In Mongo, we don&rsquo;t work with tables and rows, we work with <strong>collections</strong> and <strong>documents</strong>. Documents contain JSON/BSON hashes, so any data that can be represented as a hash can be stored in Mongo. Mongo is a <strong>schemaless</strong> database, meaning there&rsquo;s no requirements nor enforcement about the structure of the data in a document.</p>
 
@@ -1314,7 +1494,7 @@
   <entry>
     <title type="html"><![CDATA[Rails Internationalization (I18n)]]></title>
     <link href="http://kerrizor.com/blog/2014/03/31/rails-internationalization-i18n/"/>
-    <updated>2014-03-31T12:01:32-07:00</updated>
+    <updated>2014-03-31T15:01:32-04:00</updated>
     <id>http://kerrizor.com/blog/2014/03/31/rails-internationalization-i18n</id>
     <content type="html"><![CDATA[<p>Rails by default installs support for internationalization (or <em>I18n</em>) through the gem <code>i18n</code>. This gem add support for multiple language dictionaries and translation files, to let you easily change the language your site displays.</p>
 
@@ -1466,7 +1646,7 @@
   <entry>
     <title type="html"><![CDATA[Practice Makes Perfect]]></title>
     <link href="http://kerrizor.com/blog/2013/08/02/practice-makes-perfect/"/>
-    <updated>2013-08-02T14:58:00-07:00</updated>
+    <updated>2013-08-02T14:58:00-04:00</updated>
     <id>http://kerrizor.com/blog/2013/08/02/practice-makes-perfect</id>
     <content type="html"><![CDATA[<p><em>This post originally appeared on the <a href="http://www.bluebox.net/about/blog/2012/06/practice-make-perfect/">Blue Box blog</a></em></p>
 

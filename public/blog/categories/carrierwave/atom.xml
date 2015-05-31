@@ -4,7 +4,7 @@
   <title><![CDATA[Category: CarrierWave | Kerri Miller]]></title>
   <link href="http://kerrizor.com/blog/categories/carrierwave/atom.xml" rel="self"/>
   <link href="http://kerrizor.com/"/>
-  <updated>2015-01-18T10:23:55-08:00</updated>
+  <updated>2015-05-30T21:21:26-04:00</updated>
   <id>http://kerrizor.com/</id>
   <author>
     <name><![CDATA[Kerri Miller]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[CarrierWave and S3]]></title>
     <link href="http://kerrizor.com/blog/2014/04/13/carrierwave-and-s3/"/>
-    <updated>2014-04-13T15:13:22-07:00</updated>
+    <updated>2014-04-13T18:13:22-04:00</updated>
     <id>http://kerrizor.com/blog/2014/04/13/carrierwave-and-s3</id>
     <content type="html"><![CDATA[<p>CarrierWave is a gem that adds a fairly simple and flexible way to users to upload files to our Rails application. <!-- more --> It also lets us resize images to make thumbnails and other sizes as we need them, and lets us upload all these uploaded (and generated) files to cloud storage products, such as S3.</p>
 
