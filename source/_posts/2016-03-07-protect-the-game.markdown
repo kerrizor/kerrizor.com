@@ -3,7 +3,7 @@ layout: post
 title: "Protect the Integrity of the Game"
 date: 2016-03-07 11:28:05 -0800
 comments: true
-categories:
+categories: [Culture, Teams, Leadership]
 ---
 In poker, one of the rules is "All players must protect the integrity of the game." <!-- more -->You keep an eye on other people's belongings, their 💰, watch for suspicious actions, speaking up if something obviously against the rules is happening, etc. I really like that idea, that we're all there to look out for each other.
 
