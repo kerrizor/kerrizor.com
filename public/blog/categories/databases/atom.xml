@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Databases | Kerri Miller]]></title>
   <link href="http://kerrizor.com/blog/categories/databases/atom.xml" rel="self"/>
   <link href="http://kerrizor.com/"/>
-  <updated>2015-05-30T21:55:42-04:00</updated>
+  <updated>2016-03-07T11:32:53-08:00</updated>
   <id>http://kerrizor.com/</id>
   <author>
     <name><![CDATA[Kerri Miller]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[A Quick Intro To MongoDB In Rails]]></title>
     <link href="http://kerrizor.com/blog/2014/04/02/quick-intro-to-mongodb-in-rails/"/>
-    <updated>2014-04-02T20:04:33-04:00</updated>
+    <updated>2014-04-02T17:04:33-07:00</updated>
     <id>http://kerrizor.com/blog/2014/04/02/quick-intro-to-mongodb-in-rails</id>
     <content type="html"><![CDATA[<p>By Internet standards, MongoDB is a venerable NoSQL database. <!-- more -->First introduced in 2009, it was designed as a scalable document storage engine. In Mongo, we don&rsquo;t work with tables and rows, we work with <strong>collections</strong> and <strong>documents</strong>. Documents contain JSON/BSON hashes, so any data that can be represented as a hash can be stored in Mongo. Mongo is a <strong>schemaless</strong> database, meaning there&rsquo;s no requirements nor enforcement about the structure of the data in a document.</p>
 

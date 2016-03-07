@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Training | Kerri Miller]]></title>
   <link href="http://kerrizor.com/blog/categories/training/atom.xml" rel="self"/>
   <link href="http://kerrizor.com/"/>
-  <updated>2015-05-30T21:55:42-04:00</updated>
+  <updated>2016-03-07T11:32:53-08:00</updated>
   <id>http://kerrizor.com/</id>
   <author>
     <name><![CDATA[Kerri Miller]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Serendipity and Ruby Objects]]></title>
     <link href="http://kerrizor.com/blog/2015/05/14/serendipity-and-ruby-objects/"/>
-    <updated>2015-05-14T13:38:12-04:00</updated>
+    <updated>2015-05-14T10:38:12-07:00</updated>
     <id>http://kerrizor.com/blog/2015/05/14/serendipity-and-ruby-objects</id>
     <content type="html"><![CDATA[<p>One of the things that I explicitly try to model when I&rsquo;m teaching people is the idea that There Ain&rsquo;t No Such Thing As An Expert. <!-- more -->There are precious few people who know everything inside and out, and rather than try to puff myself up as some sort of magical repository of wisdom, it&rsquo;s better to model for students how to react to moments of discovering your knowledge isn&rsquo;t perfect, how to turn a surprise into a learning opportunity.</p>
 
@@ -158,7 +158,7 @@ Returns true if mod is a subclass of other. Returns nil if there&rsquo;s no rela
   <entry>
     <title type="html"><![CDATA[Pair Programming Peanut Butter and Jelly Sandwiches]]></title>
     <link href="http://kerrizor.com/blog/2014/04/12/pair-programming-peanut-butter-and-jelly-sandwiches/"/>
-    <updated>2014-04-12T12:40:33-04:00</updated>
+    <updated>2014-04-12T09:40:33-07:00</updated>
     <id>http://kerrizor.com/blog/2014/04/12/pair-programming-peanut-butter-and-jelly-sandwiches</id>
     <content type="html"><![CDATA[<p>For this activity, pairs will work together to make a peanut butter and jelly sandwich. <!-- more --> One person will give instructions on how to make the sandwich while the other is tasked with carrying out those instructions. The one giving instructions can not touch the ingredients or tools, and the one receiving instructions can not speak back.</p>
 
@@ -226,7 +226,7 @@ Returns true if mod is a subclass of other. Returns nil if there&rsquo;s no rela
   <entry>
     <title type="html"><![CDATA[Practice Makes Perfect]]></title>
     <link href="http://kerrizor.com/blog/2013/08/02/practice-makes-perfect/"/>
-    <updated>2013-08-02T14:58:00-04:00</updated>
+    <updated>2013-08-02T14:58:00-07:00</updated>
     <id>http://kerrizor.com/blog/2013/08/02/practice-makes-perfect</id>
     <content type="html"><![CDATA[<p><em>This post originally appeared on the <a href="http://www.bluebox.net/about/blog/2012/06/practice-make-perfect/">Blue Box blog</a></em></p>
 
