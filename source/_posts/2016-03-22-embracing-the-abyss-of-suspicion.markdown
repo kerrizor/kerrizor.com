@@ -38,4 +38,4 @@ Slavoj Žižek said:
 
 This is the insufficiency of our ideology. We apply our carried ideology to the next task or project or technology, and we can change them in and out like the glasses. The ideologies we apply to code can change drastically, or mutate over time as we are exposed to success and failure. In many ways then, success is as harmful (even more so) than failure because success never prompts us to question the status quo.
 
-I'm a better developer not because I've been strapped to a rocket and gotten high-fives on the way up, but specifically because I've done so many dumb things. Constantly making mistakes has built my ideology - what is yours built from?
+I'm a better developer not because I've been strapped to a rocket and gotten high-fives on the way up, but specifically because I've done so many dumb things, because I'm constantly seeking to approach the fact of being a developer with different approaches and techniques -- the dogma and ideologies of the developer. In a never ending process, I have built my built my ideology from observation, failure, and recovery -- what is yours built from?
