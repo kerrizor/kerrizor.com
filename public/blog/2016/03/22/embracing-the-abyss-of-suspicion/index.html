@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Embracing the Abyss of Suspicion - Kerri Miller</title>
+  <meta name="author" content="Kerri Miller">
+
+  
+  <meta name="description" content="Embracing the Abyss of Suspicion written March 22, 2016 in Culture, Learning It is &ldquo;simple&rdquo; in many ways to deconstruct an application. &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://kerrizor.com/blog/2016/03/22/embracing-the-abyss-of-suspicion">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Kerri Miller" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  
+
+</head>
+
+  <body>
+    <a href="/" class="home-icon">
+      <img src="/images/home.png"/>
+    </a>
+
+    <article role="article" class="full-single-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h1>Embracing the Abyss of Suspicion</h1>
+        <div class="meta">
+          written 
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2016-03-22T08:35:30-07:00" pubdate data-updated="true">March 22, 2016</time> in
+          
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/culture/'>Culture</a>, <a class='category' href='/blog/categories/learning/'>Learning</a>
+  
+</span>
+
+
+        </div>
+        <p>It is &ldquo;simple&rdquo; in many ways to deconstruct an application.<!-- more --> We do this as a matter of course in many refactoring efforts, and whenever we&rsquo;re approaching an existing code base. We examine the pieces individually, or perhaps we trace through subsystems and interactions &ndash; this external action or detected state initiates this response in the code, prompting a cascade of effects and processes to themselves begin, often with a resulting calculation or response returns upwards out of the code.</p>
+
+<p>..but what does it mean?</p>
+
+<p>Code is written as a response to a human need. That need might be a report of profits and losses for the quarter, ordering queso deliveries at 3am, or delighting a child with edutainment, but these are all driven by a human wanting something. Naturally, the argument could be made that the world doesn&rsquo;t need &ldquo;Uber for cheese dip&rdquo; and while you&rsquo;d likely be correct, the human need in this case is driven by our economics; someone with money to invest has determined that the best use of their resources is to attempt to make a go out of on-demand fondue.</p>
+
+<p>Code must exist outside of merely the mechanistic operation of a computer, and be valued within the context of it serving a given need. A piece of software that fails to meet this need can be said to be &ldquo;poor,&rdquo; and one that achieves it&rsquo;s goal to be &ldquo;good.&rdquo; This is especially true once we take into account the fact that code must also exist within a context of multiple human needs, which sometimes compete. The needs of end users, the needs of the business, the needs of the developers, but also the needs of the code itself as a distinctly human creation that must be tended and groomed as its contexts shifts &mdash; all these ends must be served.</p>
+
+<p>Thus, if you can&rsquo;t consider what a thing <em>means</em>, and look only at what it <em>is</em>, you hobble your ability to understand the larger complex that thing exists within. Too often we work in a world of architects who generate reams of diagrams showing us the topology of a system. Valuable information, to be sure, and critical to the goal of architectural design, but too often there is precious little information about the <em>how</em> of a system, let alone the <em>why</em>. We are shown a static representation of the system, with no clues as to the flow of messages and interactions between it&rsquo;s parts in response to stimuli. In an effort to catalog and organize the units of a system, we fail to explore it&rsquo;s existence in Time, or tell the story of it&rsquo;s interactions with us.</p>
+
+<p>As we observe the interplay between these forces, of the code attempting to fulfill demands, along with the demands shifting as the code satisfies needs and perhaps reveals needs previously unknown needs, our ability to reason increases as facts about the function and purpose are revealed. Just as sculptor can be said to not be fashioning a statue from marble so much as removing excess marble to reveal the statue hidden inside the block, code can be said to have an idealized state in which it could be said to be &ldquo;perfect&rdquo; in serving in balance all the demands which have been placed upon it.</p>
+
+<p>Rationally, we recognize that this can never actually be true; code can never be perfect, as the context for it continually shifts. This brings to mind the process of evolution, creating never a perfect species, but only perfectly evolved species for their environment <strong>in this moment</strong>. This small distinction contains the recognition that as time progresses, demands shift, people come and go, and we continually learn more and more about our craft. Weeks or months go by, and our perfect statue no longer seems to have been fully exposed; there are bits of marble left to remove, subtleties to the human need that weren&rsquo;t served in our initial attempts that must now be addressed. As the environment changes, clinging to our beliefs about the relative correctness of the code without considering the new landscape of demands is a step towards technical doom.</p>
+
+<h2>Testing</h2>
+
+<p>We attempt to model our comprehension of the desire of the software with testing, to say &ldquo;this code suits what I know about this human need.&rdquo; Unit testing exists within the mechanistic state of &ldquo;what does this thing do?&rdquo; whereas integration or behavioral testing attempts to address the questions of &ldquo;<em>what</em> does this mean?&rdquo; and &ldquo;how does this software exist within a dynamic environment?&rdquo; As they strive to gain confidence and knowledge about literally the interactions and behaviors of objects, the begin to illuminate us as to the nature of the code within context. Both aspects must be examined, and it is a failure in ourselves that we can not bridge the gulf between these concepts &ndash; the static existence versus the dynamic. One common trait shared by more experienced developers is the ability to shift contextual viewpoint between these perspectives, to swap the ideology of the watchmaker-like world of unit testing, for the &ldquo;30,000 foot view&rdquo; ideology.</p>
+
+<p>Each of these angles of testing directly serve to build a more detailed picture of the need we&rsquo;re attempting to satisfy, and the manner in which we&rsquo;re fulfilling it. As complexity grows however, it exposes the limits of our rationality. There simply exist too many states, too many interactions, for either our code <strong>or</strong> testing to be considered complete, and as more and more demands are placed upon the code, its purpose must ever more be at cross purposes with itself, its identity becoming muddled. How often have you built a pure API, only to realize that now you must add a reporting tool? ..an admin dashboard? ..some sort of data manipulation never once hinted at in the original problem statement? Rather than being &ldquo;confident,&rdquo; at best we can aspire to be &ldquo;comprehensive&rdquo; in our code and our tests, a word which itself is misleading and truthful, as if our testing could &ldquo;comprehend&rdquo; the code&rsquo;s possibilities, rather it is at best merely a representation of our limited knowledge of known fail states.</p>
+
+<p>Code exists as instructions, a series of reactions to stimuli. Thus, an error case then represents something new, something that the code does not have a prearranged response to. A bug occurs and we are pushed into a place of discovery. We are presented with proof of our insufficiencies, either as developers making an inevitable, human mistake in syntax, control flow, or other &ldquo;duh&rdquo; errors, or in our understanding of the process required for code to successfully achieve the goal we had in creating it.</p>
+
+<p>This land of discovery increases our ability to reason about the nature of software, both in terms of the immediate code and the code as it exists into the future. In a sense then, if we accept that code is an expression of our understanding, all code must then exist as a single code base or repo, across projects and jobs and technologies. We are the single constant, bringing our comprehension of the nature of computational instructions to bear when generating solutions to human needs, which themselves exists within the boundaries of humanity. By understanding the rationality of software, as well as the human context in which its created, you multiply your ability to craft solutions that are increasingly resilient &ndash; but still, never perfect.</p>
+
+<p>It is in the challenging of our starting point, pushing us from stasis to growth, that wisdom can begin to emerge. We engage with the Hero&rsquo;s Journey and return with knowledge to slay the instance of failure, and our relationship to the wider context that has generated this failure is forever changed &ndash; fool me once can&rsquo;t fool me again</p>
+
+<p>Slavoj Žižek said:</p>
+
+<blockquote><p>Imagine ideology as a kind of filter, a frame, so that if you look at the same ordinary reality through that frame, everything changes. But in what sense? It&rsquo;s not that the frame actually adds anything. It&rsquo;s just that the frame opens the abyss of suspicion.</p></blockquote>
+
+<p>This is the insufficiency of our ideology. We apply our carried ideology to the next task or project or technology, and we can change them in and out like the glasses. The ideologies we apply to code can change drastically, or mutate over time as we are exposed to success and failure. In many ways then, success is as harmful (even more so) than failure because success never prompts us to question the status quo.</p>
+
+<p>I&rsquo;m a better developer not because I&rsquo;ve been strapped to a rocket and gotten high-fives on the way up, but specifically because I&rsquo;ve done so many dumb things, because I&rsquo;m constantly seeking to approach the fact of being a developer with different approaches and techniques &mdash; the dogma and ideologies of the developer. In a never ending process, I have built my built my ideology from observation, failure, and recovery &mdash; what is yours built from?</p>
+
+      </div>
+    </div>
+  </div>
+</article>
+
+<hr class="divider-short"/>
+
+<div class="archive-link">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        
+          <a class="pull-left" href="/blog/2016/03/07/protect-the-game/" title="Previous Post: Protect the Integrity of the Game">&laquo; Previous: Protect the Integrity of the Game</a>
+        
+
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+          /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+          var disqus_shortname = 'kerrizor'; // required: replace example with your forum shortname
+
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+              var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+  </div>
+</div>
+
+
+
+    <footer id="footer" class="her-row">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1">
+  <a href="/"><h4>Home</h4></a>
+</div>
+
+<div class="col-md-2">
+  <div class="social-icon-list">
+    <a href="https://twitter.com/kerrizor"><img src="/images/glyphicons_social_31_twitter.png"/></a>
+    <a href="https://github.com/kerrizor"><img src="/images/glyphicons_social_21_github.png"/></a>
+    <a href="mailto:kerrizor@kerrizor.com"><img src="/images/glyphicons_social_39_e-mail.png"/></a>
+  </div>
+</div>
+
+<div class="pull-right">
+  <h4>Powered by <a href="http://octopress.org/">Octopress</a>. Designed by <a href="http://AdrianArtiles.com">Adrian Artiles</a>.</h4>
+</div>
+
+
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>
